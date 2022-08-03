@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Component, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchProductThunk } from "../store/singleProduct";
@@ -24,13 +24,13 @@ const singleProductView = (props) => {
 
 const mapDispatchToState = (state) => {
   return {
-    product: state.product,
+    product: state.singleProduct,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProductThunk: () => dispatch(fetchProductThunk),
+    fetchProductThunk: (productId) => dispatch(fetchProductThunk(productId)),
   };
 };
 
