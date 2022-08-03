@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
-import SingleProduct, { fetchProductThunk } from "../store/singleProduct";
+import { fetchProductThunk } from "../store/singleProduct";
+import SingleProduct from "../components/SingleProduct";
 
 const singleProductView = (props) => {
   const { productId } = useParams();
