@@ -44,3 +44,38 @@ router.get("/:productId", async (req, res, next) => {
     next(err);
   }
 });
+
+router.post("/", async (req, res, next) => {
+  try {
+    res.status(201).send(await Product.create(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/:productId", async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.productId);
+    if (product) {
+      await product.destroy();
+      res.send(product);
+    } else {
+      res.status(404).send("Not Found");
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:productId", async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(req.params.productId);
+    if (product) {
+      res.send(await product.update(req.body));
+    } else {
+      res.status(404).send("Not Found");
+    }
+  } catch (err) {
+    next(err);
+  }
+});
