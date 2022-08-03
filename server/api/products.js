@@ -1,27 +1,48 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   models: { Product },
-} = require("../db");
+} = require('../db');
 module.exports = router;
 
-router.get("/", async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
       // explicitly select only the id and username fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
       attributes: [
-        "id",
-        "name",
-        "imageURL",
-        "shortDescription",
-        "longDescription",
-        "price",
-        "category",
-        "noiseCancelling",
+        'id',
+        'name',
+        'imageURL',
+        'shortDescription',
+        'longDescription',
+        'price',
+        'category',
+        'noiseCancelling',
       ],
     });
     res.json(products);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/:productId', async (req, res, next) => {
+  try {
+    const productId = req.params.productId;
+    const product = await Product.findByPk(productId, {
+      attributes: [
+        'id',
+        'name',
+        'imageURL',
+        'shortDescription',
+        'longDescription',
+        'price',
+        'category',
+        'noiseCancelling',
+      ],
+    });
+    res.json(product);
   } catch (err) {
     next(err);
   }
