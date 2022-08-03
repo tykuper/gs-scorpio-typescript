@@ -7,17 +7,68 @@ module.exports = router;
 router.get("/", async (req, res, next) => {
   try {
     const orders = await Order.findAll({
-      // explicitly select only the id and username fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       attributes: ["id", "isOpen", "orderStatus"],
       include: [
-        { model: Product, as: "products" },
-        { model: User, as: "user" },
+        {
+          model: Product,
+          as: "products",
+          attributes: [
+            "id",
+            "name",
+            "imageURL",
+            "shortDescription",
+            "longDescription",
+            "price",
+            "category",
+            "noiseCancelling",
+          ],
+        },
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "firstName", "lastName", "email"],
+        },
       ],
     });
     res.json(orders);
   } catch (err) {
     next(err);
+  }
+});
+
+// get ALL orders for user with userId
+router.get("/user/:userId", async (req, res, next) => {
+  try {
+    const { isOpen, orderStatus } = req.query;
+    const orders = await Order.findAll({
+      attributes: ["id", "isOpen", "orderStatus"],
+      include: [
+        {
+          model: Product,
+          as: "products",
+          attributes: [
+            "id",
+            "name",
+            "imageURL",
+            "shortDescription",
+            "longDescription",
+            "price",
+            "category",
+            "noiseCancelling",
+          ],
+        },
+        {
+          model: User,
+          as: "user",
+          attributes: ["id", "firstName", "lastName", "email"],
+          where: {
+            id: req.params.userId,
+          },
+        },
+      ],
+    });
+    res.json(orders);
+  } catch (err) {
+    next(error);
   }
 });
