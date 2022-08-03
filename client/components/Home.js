@@ -15,7 +15,7 @@ export const Home = (props) => {
           <h2>Category 1</h2>
           <div className="col-md-3 col-sm-6 mb-5"></div>
         </div>
-        <div class>
+        <div className="row">
           <h2>Category 2</h2>
           <div className="col-md-3 col-sm-6 mb-5"></div>
         </div>
