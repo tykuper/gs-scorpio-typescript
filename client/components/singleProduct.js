@@ -1,7 +1,7 @@
-import React from "react";
-import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
-import styles from "./SingleProduct.module.css";
-import { Helmet } from "react-helmet-async";
+import React from 'react';
+import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap';
+import styles from './SingleProduct.module.css';
+import { Helmet } from 'react-helmet-async';
 
 const SingleProduct = (props) => {
   const {
