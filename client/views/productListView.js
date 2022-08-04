@@ -1,5 +1,6 @@
 import React, { Component, Fragment, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { fetchProductsThunk } from '../store/products';
 import ProductCard from '../components/productCard';
@@ -11,11 +12,12 @@ const ProductListView = (props) => {
 
   return (
     <div>
-      <Fragment>
+      <h1>Product List</h1>
+      <div className="row">
         {props.products?.map((product) => {
           return <ProductCard key={product.id} product={product} />;
         })}
-      </Fragment>
+      </div>
     </div>
   );
 };
