@@ -8,7 +8,7 @@ function orderNumber() {
   return [now.slice(0, 4), now.slice(4, 10), now.slice(10, 14)].join("-");
 }
 
-export const OrderConfirmation = (props) => {
+export const ConfirmationPageView = (props) => {
   return (
     <div className="row">
       <div className="col">
