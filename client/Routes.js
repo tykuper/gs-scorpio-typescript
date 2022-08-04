@@ -7,6 +7,7 @@ import { ConfirmationPageView } from "./views/confirmationPageView";
 import { me } from "./store";
 import checkOutView from "./views/checkOutView";
 import SingleProductView from "./views/SingleProductView";
+import ProductListView from "./views/ProductListView";
 
 /**
  * COMPONENT
@@ -37,6 +38,7 @@ class Routes extends Component {
           <Route path="/home" component={Home} />
           <Route path="/products/:productId" component={SingleProductView} />
           <Route path="/checkout/" component={checkOutView} />
+          <Route path="/products" component={ProductListView} />
           <Route path="/confirmed/:orderId" component={ConfirmationPageView} />
           <Redirect to="/home" />
         </Switch>
