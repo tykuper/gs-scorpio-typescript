@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <nav className="navbar navbar-expand-lg fixed-top bg-secondary">
+  <nav className="navbar navbar-expand-lg bg-secondary">
     <div className="container-fluid">
       <span>
         <Link className="navbar-brand" to="/home">
