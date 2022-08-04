@@ -5,6 +5,7 @@ import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { OrderConfirmation } from "./components/OrderConfirmation";
 import { me } from "./store";
+import checkOutView from "./views/checkOutView";
 import SingleProductView from "./views/SingleProductView";
 
 /**
@@ -36,6 +37,7 @@ class Routes extends Component {
           <Route path="/home" component={Home} />
           <Route path="/products/:productId" component={SingleProductView} />
           <Route path="/confirmed/:orderId" component={OrderConfirmation} />
+          <Route path="/checkout/" component={checkOutView} />
           <Redirect to="/home" />
         </Switch>
       </div>
