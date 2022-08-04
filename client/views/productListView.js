@@ -5,7 +5,6 @@ import { fetchProductsThunk } from '../store/products';
 import ProductCard from '../components/productCard';
 
 const ProductListView = (props) => {
-  console.log('*************************', props, props.products);
   useEffect(() => {
     props.fetchProductsThunk();
   }, []);
