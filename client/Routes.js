@@ -8,6 +8,8 @@ import { me } from "./store";
 import checkOutView from "./views/checkOutView";
 import SingleProductView from "./views/SingleProductView";
 import ProductListView from "./views/ProductListView";
+import LogInView from "./views/logInView";
+import SignUpView from "./views/signUpView";
 
 /**
  * COMPONENT
@@ -40,6 +42,8 @@ class Routes extends Component {
           <Route path="/checkout/" component={checkOutView} />
           <Route path="/products" component={ProductListView} />
           <Route path="/confirmed/:orderId" component={ConfirmationPageView} />
+          <Route path="/login" component={LogInView} />
+          <Route path="/signup" component={SignUpView} />
           <Redirect to="/home" />
         </Switch>
       </div>
