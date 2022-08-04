@@ -36,7 +36,6 @@ class Routes extends Component {
         <Switch>
           <Route path="/home" component={Home} />
           <Route path="/products/:productId" component={SingleProductView} />
-          <Route path="/confirmed/:orderId" component={OrderConfirmation} />
           <Route path="/checkout/" component={checkOutView} />
           <Route path="/confirmed/:orderId" component={ConfirmationPageView} />
           <Redirect to="/home" />
