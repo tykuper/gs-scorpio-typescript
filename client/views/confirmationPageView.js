@@ -1,12 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
-function orderNumber() {
-  let now = Date.now().toString();
-  now += now + Math.floor(Math.random() * 10);
-  return [now.slice(0, 4), now.slice(4, 10), now.slice(10, 14)].join("-");
-}
+import { orderNumber } from "../utility";
 
 export const ConfirmationPageView = (props) => {
   return (
