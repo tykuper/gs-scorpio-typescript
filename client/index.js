@@ -8,7 +8,7 @@ import App from "./App";
 import { HelmetProvider } from "react-helmet-async";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-// import "./custom.scss";
+import "./custom.scss";
 
 ReactDOM.render(
   <Provider store={store}>
