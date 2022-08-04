@@ -72,6 +72,8 @@ const mapSignup = (state) => {
 };
 
 const mapDispatch = (dispatch) => {
+  let firstName = "";
+  let lastName = "";
   return {
     handleSubmit(evt) {
       evt.preventDefault();
