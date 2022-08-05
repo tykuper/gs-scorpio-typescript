@@ -10,11 +10,8 @@ import SingleProductView from "./views/SingleProductView";
 import ProductListView from "./views/ProductListView";
 import LogInView from "./views/logInView";
 import SignUpView from "./views/signUpView";
-<<<<<<< HEAD
 import AddProductForm from "./components/AddProductForm";
-=======
 import CartView from "./views/CartView";
->>>>>>> f1b6958ca41b045905b2a2134639ee68c7b44adc
 
 /**
  * COMPONENT
