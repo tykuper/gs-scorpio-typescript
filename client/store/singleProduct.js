@@ -2,7 +2,7 @@ import axios from "axios";
 
 const FETCH_PRODUCT = "FETCH_PRODUCT";
 
-const fetchProduct = (product) => ({
+export const fetchProduct = (product) => ({
   type: FETCH_PRODUCT,
   product,
 });
