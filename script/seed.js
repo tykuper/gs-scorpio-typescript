@@ -67,6 +67,8 @@ async function seed() {
       price: 199.0,
       category: "in-ear",
       noiseCancelling: true,
+      numReviews: 232,
+      ratings: 3.5,
     }),
     Product.create({
       name: "SoundSport wireless headphones",
@@ -78,6 +80,8 @@ async function seed() {
       price: 149.0,
       category: "in-ear",
       noiseCancelling: false,
+      numReviews: 123,
+      ratings: 2.5,
     }),
     Product.create({
       name: "QuietComfort 45 headphones",
@@ -89,6 +93,8 @@ async function seed() {
       price: 279.0,
       category: "over-ear",
       noiseCancelling: true,
+      numReviews: 11,
+      ratings: 5.0,
     }),
     Product.create({
       name: "Sport Earbuds",
@@ -101,6 +107,8 @@ async function seed() {
       price: 124.0,
       category: "in-ear",
       noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
     }),
   ]);
 
