@@ -10,23 +10,69 @@ const AuthForm = (props) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
+      <form
+        onSubmit={handleSubmit}
+        name={name}
+        className="row needs-validation"
+        novalidate
+      >
+        {name === "signup" ? (
+          <div>
+            <div className="col-md-4 m-4">
+              <label htmlFor="firstName" className="form-label">
+                First Name
+              </label>
+              <input
+                name="firstName"
+                type="text"
+                className="form-control"
+                required
+              />
+            </div>
+            <div className="col-md-4 m-4">
+              <label htmlFor="lastName" className="form-label">
+                Last Name
+              </label>
+              <input
+                name="lastName"
+                type="text"
+                className="form-control"
+                required
+              />
+            </div>
+          </div>
+        ) : null}
         <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="email" />
+          <div className="col-md-4 m-4">
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
+            <input
+              name="email"
+              type="email"
+              className="form-control"
+              required
+            />
+            <div class="invalid-feedback">Please provide a valid email.</div>
+          </div>
+          <div className="col-md-4 m-4">
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
+            <input
+              name="password"
+              type="password"
+              className="form-control"
+              required
+            />
+          </div>
+          <div className="d-block">
+            <button className="btn btn-primary" type="submit">
+              {displayName}
+            </button>
+          </div>
+          {error && error.response && <div> {error.response.data} </div>}
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
       </form>
     </div>
   );
@@ -56,13 +102,19 @@ const mapSignup = (state) => {
 };
 
 const mapDispatch = (dispatch) => {
+  let firstName = "";
+  let lastName = "";
   return {
     handleSubmit(evt) {
       evt.preventDefault();
+      if (evt.target.name === "signup") {
+        firstName = evt.target.firstName.value;
+        lastName = evt.target.lastName.value;
+      }
       const formName = evt.target.name;
-      const username = evt.target.username.value;
+      const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(username, password, formName));
+      dispatch(authenticate(email, password, firstName, lastName, formName));
     },
   };
 };
