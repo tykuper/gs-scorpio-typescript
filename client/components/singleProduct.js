@@ -1,11 +1,11 @@
-import React from "react";
-import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
-import styles from "./SingleProduct.module.css";
-import { Helmet } from "react-helmet-async";
-import { addToCart } from "../store/cart";
-import { connect } from "react-redux";
-import history from "../history.js";
-import FiveStarReviews from "./FiveStarReviews";
+import React from 'react';
+import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap';
+import styles from './SingleProduct.module.css';
+import { Helmet } from 'react-helmet-async';
+import { addToCart } from '../store/cart';
+import { connect } from 'react-redux';
+import history from '../history.js';
+import FiveStarReviews from './FiveStarReviews';
 
 const SingleProduct = (props) => {
   const {
@@ -25,7 +25,7 @@ const SingleProduct = (props) => {
 
     props.addToCart(addedProduct);
 
-    history.push("/cart");
+    history.push('/cart');
   };
 
   return (
