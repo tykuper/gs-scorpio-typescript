@@ -6,6 +6,7 @@ import CheckOutOrders from "./CheckOutOrders";
 import CheckOutShipping from "./CheckOutShipping";
 import CheckOutPayment from "./CheckOutPayment";
 import CheckOutSummary from "./CheckOutSummary";
+import { connect } from "react-redux";
 
 const FAKE_CHECKOUT_DATA = {
   address: "113 3rd Lane Marcus Hook, PA 19061",
@@ -39,26 +40,36 @@ const FAKE_CHECKOUT_DATA = {
 };
 
 const CheckOut = (props) => {
+  const cartItems = props.cart;
+
   return (
     <Fragment>
       <Helmet>
         <title>Checkout</title>
       </Helmet>
-      <h1 className="m-4 text-center">Checkout</h1>
-      <Row>
+      <h1 className="m-4 text-center">
+        <strong>Checkout</strong>
+      </h1>
+      <Row className="m-3 justify-content-around">
         <Col md={7}>
-          <CheckOutOrders products={FAKE_CHECKOUT_DATA.products} />
+          <CheckOutOrders products={cartItems} />
 
           <CheckOutShipping checkOutData={FAKE_CHECKOUT_DATA} />
 
           <CheckOutPayment checkOutData={FAKE_CHECKOUT_DATA} />
         </Col>
         <Col md={4}>
-          <CheckOutSummary checkOutData={FAKE_CHECKOUT_DATA} />
+          <CheckOutSummary cartItems={cartItems} />
         </Col>
       </Row>
     </Fragment>
   );
 };
 
-export default CheckOut;
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart,
+  };
+};
+
+export default connect(mapStateToProps)(CheckOut);

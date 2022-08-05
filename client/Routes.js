@@ -10,7 +10,11 @@ import SingleProductView from "./views/SingleProductView";
 import ProductListView from "./views/ProductListView";
 import LogInView from "./views/logInView";
 import SignUpView from "./views/signUpView";
+<<<<<<< HEAD
 import AddProductForm from "./components/AddProductForm";
+=======
+import CartView from "./views/CartView";
+>>>>>>> f1b6958ca41b045905b2a2134639ee68c7b44adc
 
 /**
  * COMPONENT
@@ -40,12 +44,13 @@ class Routes extends Component {
         <Switch>
           <Route path="/home" component={Home} />
           <Route path="/products/:productId" component={SingleProductView} />
-          <Route path="/checkout/" component={checkOutView} />
+          <Route path="/checkout" component={checkOutView} />
           <Route path="/products" component={ProductListView} />
           <Route path="/confirmed/:orderId" component={ConfirmationPageView} />
           <Route path="/login" component={LogInView} />
           <Route path="/signup" component={SignUpView} />
           <Route path="/manage/products" component={AddProductForm} />
+          <Route path="/cart" component={CartView} />
           <Redirect to="/home" />
         </Switch>
       </div>
