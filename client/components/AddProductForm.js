@@ -1,4 +1,5 @@
 import React from "react";
+import { addProductThunk } from "../store/products";
 import { connect } from "react-redux";
 
 const AddProductForm = (props) => {

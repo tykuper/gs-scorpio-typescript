@@ -46,7 +46,7 @@ class Routes extends Component {
           <Route path="/confirmed/:orderId" component={ConfirmationPageView} />
           <Route path="/login" component={LogInView} />
           <Route path="/signup" component={SignUpView} />
-          <Route path="/manage/products" component={AddProductForm} />
+          <Route path="/manage/products/add" component={AddProductForm} />
           <Route path="/cart" component={CartView} />
           <Redirect to="/home" />
         </Switch>
