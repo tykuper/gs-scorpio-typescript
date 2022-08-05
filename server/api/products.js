@@ -37,6 +37,8 @@ router.get("/:productId", async (req, res, next) => {
         "price",
         "category",
         "noiseCancelling",
+        "numReviews",
+        "ratings",
       ],
     });
     res.json(product);
