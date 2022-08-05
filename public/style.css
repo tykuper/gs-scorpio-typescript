@@ -6,10 +6,6 @@ a {
   text-decoration: none;
 }
 
-label {
-  display: block;
-}
-
 nav a {
   display: inline-block;
   margin: 1em;
