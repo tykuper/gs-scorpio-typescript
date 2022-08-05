@@ -10,6 +10,8 @@ import SingleProductView from "./views/SingleProductView";
 import ProductListView from "./views/ProductListView";
 import LogInView from "./views/logInView";
 import SignUpView from "./views/signUpView";
+import AddProductForm from "./components/AddProductForm";
+import EditProductForm from "./components/EditProductForm";
 import CartView from "./views/CartView";
 
 /**
@@ -21,7 +23,7 @@ class Routes extends Component {
   }
 
   render() {
-    // const {isLoggedIn} = this.props
+    const { isLoggedIn, isAdmin } = this.props;
 
     return (
       <div>
@@ -45,6 +47,8 @@ class Routes extends Component {
           <Route path="/confirmed/:orderId" component={ConfirmationPageView} />
           <Route path="/login" component={LogInView} />
           <Route path="/signup" component={SignUpView} />
+          <Route path="/manage/products/add" component={AddProductForm} />
+          <Route path="/manage/products/edit" component={EditProductForm} />
           <Route path="/cart" component={CartView} />
           <Redirect to="/home" />
         </Switch>
@@ -61,6 +65,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.isAdmin,
   };
 };
 
