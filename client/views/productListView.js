@@ -14,9 +14,7 @@ const ProductListView = (props) => {
 
   const addToCartHandler = async (product) => {
     const addedProduct = product;
-
     props.addToCart(addedProduct);
-
     history.push('/cart');
   };
 

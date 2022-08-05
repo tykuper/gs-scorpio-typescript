@@ -7,7 +7,6 @@ import React from 'react';
 import { logout } from '../../store';
 
 const UserNavbar = ({ user }) => {
-  //   console.log('**********************', user);
   return (
     <Navbar className="bg-secondary" expand="lg">
       <Container>
@@ -19,6 +18,7 @@ const UserNavbar = ({ user }) => {
             >
               <NavDropdown.Item href="#">Account</NavDropdown.Item>
               <NavDropdown.Item href="#">Orders</NavDropdown.Item>
+              <NavDropdown.Divider />
               <NavDropdown.Item href="/home" onClick={() => logout()}>
                 Log-out
               </NavDropdown.Item>
