@@ -30,6 +30,7 @@ const ProductListView = (props) => {
               key={product.id}
               product={product}
               onClick={addToCartHandler}
+              isAdmin={props.isAdmin}
             />
           );
         })}
@@ -41,6 +42,7 @@ const ProductListView = (props) => {
 const mapDispatchToState = (state) => {
   return {
     products: state.products,
+    isAdmin: state.auth.isAdmin !== undefined ? state.auth.isAdmin : false,
   };
 };
 

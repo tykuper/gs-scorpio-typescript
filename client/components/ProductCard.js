@@ -32,9 +32,11 @@ const ProductCard = (props) => {
           <Card.Text>${price}</Card.Text>
           <Card.Text>{shortDescription}</Card.Text>
           <ListGroup>
-            <Button variant="warning" onClick={editProduct}>
-              Edit Product
-            </Button>
+            {props.isAdmin && (
+              <Button variant="warning" onClick={editProduct}>
+                Edit Product
+              </Button>
+            )}
             <Card.Link href={`/products/${id}`}>View Product</Card.Link>
             <Button
               variant="primary"
