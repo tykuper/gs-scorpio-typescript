@@ -38,9 +38,10 @@ export const addProductThunk = (product, history) => async (dispatch) => {
   try {
     const token = window.localStorage.getItem("token");
     const { data: newProduct } = await axios.post("/api/products", {
-      product,
+      ...product,
       token,
     });
+
     dispatch(addProduct(newProduct));
     history.goBack();
   } catch (error) {
@@ -54,7 +55,7 @@ export const updateProductThunk = (product, history) => async (dispatch) => {
     const { data: updatedProduct } = await axios.put(
       `/api/products/${product.id}`,
       {
-        product,
+        ...product,
         token,
       }
     );

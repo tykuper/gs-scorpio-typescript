@@ -48,7 +48,10 @@ class Routes extends Component {
           <Route path="/login" component={LogInView} />
           <Route path="/signup" component={SignUpView} />
           <Route path="/manage/products/add" component={AddProductForm} />
-          <Route path="/manage/products/edit" component={EditProductForm} />
+          <Route
+            path="/manage/products/:productId(\d+)/edit"
+            component={EditProductForm}
+          />
           <Route path="/cart" component={CartView} />
           <Redirect to="/home" />
         </Switch>
