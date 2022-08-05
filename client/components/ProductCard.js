@@ -1,7 +1,6 @@
 import React from 'react';
 import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
 
 const ProductCard = (props) => {
   const {
@@ -25,7 +24,6 @@ const ProductCard = (props) => {
           <Card.Text>{shortDescription}</Card.Text>
           <ListGroup>
             <Card.Link href={`/products/${id}`}>View Product</Card.Link>
-            <Button variant="primary">Add to Cart</Button>
           </ListGroup>
         </Card.Body>
       </Card>
