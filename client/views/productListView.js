@@ -11,13 +11,15 @@ const ProductListView = (props) => {
   }, []);
 
   return (
-    <div>
-      <h1>Product List</h1>
-      <div className="row">
+    <div className="text-center container py-5">
+      <h4>
+        <strong>Product List</strong>
+      </h4>
+      <Row xs={1} md={2} lg={3} className="g-4">
         {props.products?.map((product) => {
           return <ProductCard key={product.id} product={product} />;
         })}
-      </div>
+      </Row>
     </div>
   );
 };
