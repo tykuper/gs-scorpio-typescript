@@ -10,6 +10,7 @@ import SingleProductView from "./views/SingleProductView";
 import ProductListView from "./views/ProductListView";
 import LogInView from "./views/logInView";
 import SignUpView from "./views/signUpView";
+import AddProductForm from "./components/AddProductForm";
 
 /**
  * COMPONENT
@@ -44,6 +45,7 @@ class Routes extends Component {
           <Route path="/confirmed/:orderId" component={ConfirmationPageView} />
           <Route path="/login" component={LogInView} />
           <Route path="/signup" component={SignUpView} />
+          <Route path="/manage/products" component={AddProductForm} />
           <Redirect to="/home" />
         </Switch>
       </div>
