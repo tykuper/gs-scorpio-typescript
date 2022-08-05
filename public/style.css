@@ -23,3 +23,11 @@ form div {
 .cart-add-minus {
   width: 50%;
 }
+
+.img-singleProduct {
+  max-width: 100%;
+}
+
+.starReviews-width {
+  width: 40%;
+}
