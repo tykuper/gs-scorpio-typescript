@@ -21,14 +21,14 @@ const CheckOutOrders = (props) => {
                     className="img-thumbnail my-2 border-0"
                   />
                 </Col>
-                <Col md={5} className="d-flex justify-content-center">
+                <Col md={5}>
                   <ListGroup variant="flush" className="checkout-Block">
                     <ListGroup.Item className="border-0 mb-3">
                       <Link
                         to={`/products/${product.id}`}
                         style={{ textDecoration: "none" }}
                       >
-                        <strong className="fs-5">{product.productName}</strong>
+                        <strong className="fs-5">{product.name}</strong>
                       </Link>
                     </ListGroup.Item>
                     <ListGroup.Item className="border-0">
