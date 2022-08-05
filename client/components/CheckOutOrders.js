@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 const CheckOutOrders = (props) => {
@@ -12,32 +13,38 @@ const CheckOutOrders = (props) => {
         <ListGroup variant="flush">
           {products.map((product) => (
             <ListGroup.Item key={product.id}>
-              <Row className="align-items-center">
-                <Col md={4}>
+              <Row className="align-items-center justify-content-around">
+                <Col md={5}>
                   <img
                     src={product.imageURL}
                     alt={product.productName}
-                    className="img-thumbnail mb-2"
+                    className="img-thumbnail my-2 border-0"
                   />
-                  <Link
-                    to={`/products/${product.id}`}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <strong className="fs-5">{product.productName}</strong>
-                  </Link>
                 </Col>
-                <Col md={3}>
-                  <ListGroup variant="flush">
+                <Col md={5} className="d-flex justify-content-center">
+                  <ListGroup variant="flush" className="checkout-Block">
+                    <ListGroup.Item className="border-0 mb-3">
+                      <Link
+                        to={`/products/${product.id}`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <strong className="fs-5">{product.productName}</strong>
+                      </Link>
+                    </ListGroup.Item>
                     <ListGroup.Item className="border-0">
                       <Row>
-                        <Col>Quantity:</Col>
-                        <Col>{product.quantity}</Col>
+                        <Col>
+                          <span>Quantity: {product.quantity}</span>
+                        </Col>
                       </Row>
                     </ListGroup.Item>
-                    <ListGroup.Item>
+                    <ListGroup.Item className="mt-2">
                       <Row>
-                        <Col>Price:</Col>
-                        <Col>${product.price}</Col>
+                        <Col>
+                          <span>
+                            Price: ${Number(product.price).toFixed(2)}
+                          </span>
+                        </Col>
                       </Row>
                     </ListGroup.Item>
                   </ListGroup>
