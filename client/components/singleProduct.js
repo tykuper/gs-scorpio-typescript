@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
 import history from "../history.js";
+import FiveStarReviews from "./FiveStarReviews";
 
 const SingleProduct = (props) => {
   const {
@@ -15,6 +16,8 @@ const SingleProduct = (props) => {
     price,
     category,
     noiseCancelling,
+    numReviews,
+    ratings,
   } = props.product;
 
   const addToCartHandler = async () => {
@@ -33,15 +36,18 @@ const SingleProduct = (props) => {
 
       <Col md={6}>
         <ListGroup variant="flush">
-          <ListGroup.Item>
+          <ListGroup.Item className="border-0">
             <Helmet>
               <title>{name}</title>
             </Helmet>
             <h1>{name}</h1>
           </ListGroup.Item>
-          <ListGroup.Item>Price: ${price}</ListGroup.Item>
-          <ListGroup.Item>
-            Description: <p>{longDescription}</p>
+          <ListGroup.Item className="border-0">
+            <FiveStarReviews numReviews={numReviews} ratings={ratings} />
+          </ListGroup.Item>
+          <ListGroup.Item className="fs-3">${price}</ListGroup.Item>
+          <ListGroup.Item className="border-0">
+            <p>{longDescription}</p>
           </ListGroup.Item>
           <ListGroup.Item>
             <div>
