@@ -62,7 +62,6 @@ const AuthForm = (props) => {
               className="form-control"
               required
             />
-            <div class="invalid-feedback">Please provide a valid email.</div>
           </div>
           <div className="col-md-4 m-4">
             <label htmlFor="password" className="form-label">

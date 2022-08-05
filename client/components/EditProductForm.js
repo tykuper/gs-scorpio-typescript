@@ -66,14 +66,17 @@ const EditProductForm = (props) => {
           </select>
         </div>
         <div className="col-md-4 m-4">
-          <label htmlFor="noiseCanceling" className="form-check-label">
-            Noise Canceling
+          <label htmlFor="noiseCancelling" className="form-check-label">
+            Noise Cancelling
           </label>{" "}
-          <input
-            name="noiseCanceling"
-            type="checkbox"
-            className="form-check-input"
-          />
+          <select
+            name="noiseCancelling"
+            className="form-control"
+            onChange={handleChange}
+          >
+            <option value={false}>No</option>
+            <option value={true}>Yes</option>
+          </select>
         </div>
 
         <div className="d-block">
