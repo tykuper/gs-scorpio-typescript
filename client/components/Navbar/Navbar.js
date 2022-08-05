@@ -1,7 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { logout } from "../store";
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { logout } from '../../store';
+import GuestNavbar from './GuestNavbar';
+import UserNavbar from './UserNavbar';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <nav className="navbar navbar-expand-lg bg-secondary">
@@ -29,9 +31,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           </Link>
         </ul>
         <div className="d-flex">
-          <Link className="nav-link active" aria-current="page" to="/user">
-            User
-          </Link>
+          {isLoggedIn ? <UserNavbar /> : <GuestNavbar />}
           <Link className="nav-link active" aria-current="page" to="/cart">
             Cart
           </Link>
