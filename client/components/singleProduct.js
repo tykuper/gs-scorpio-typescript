@@ -27,8 +27,8 @@ const SingleProduct = (props) => {
 
   return (
     <Row className="m-3 justify-content-around">
-      <Col md={6}>
-        <img src={imageURL} alt={name}></img>
+      <Col md={6} className="d-flex justify-content-center align-items-center">
+        <img src={imageURL} alt={name} className="img-singleProduct"></img>
       </Col>
 
       <Col md={6}>
