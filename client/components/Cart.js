@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -6,14 +6,29 @@ import { IoIosAdd, IoIosRemove, IoIosTrash } from "react-icons/io";
 import { connect } from "react-redux";
 import { addToCart, removeFromCart } from "../store/cart";
 import history from "../history";
+import axios from "axios";
+import { fetchDBCartThunk } from "../store/cartDB";
 
 const Cart = (props) => {
-  const cartItems = props.cart;
+  const [updatedOrders, setUpdatedOrders] = useState([]);
+  const [orderId, setOrderId] = useState(null);
+  const [cartDB, setCartDB] = useState([]);
 
-  const singleItemTotalAmount = +cartItems.reduce(
-    (acc, curr) => acc + curr.price,
-    0
-  );
+  let cartItems;
+  // const cartDB = props.cartDB[0]?.products[0]?.orderProduct;
+  const loggedInUser = props.loggedInUser;
+
+  // console.log("cartDB: ", cartDB);
+
+  // if (cartDB && loggedInUser.id) {
+  //   cartItems = cartDB;
+  // } else {
+  //   cartItems = props.cart;
+  // }
+
+  cartItems = props.cart;
+  // console.log("cartItems: ", cartItems);
+
   const itemsTotalCount = +cartItems.reduce(
     (acc, curr) => acc + curr.quantity,
     0
@@ -25,9 +40,73 @@ const Cart = (props) => {
   );
 
   const taxRate = 0.06625;
+  const defaultTaxAmount = 0;
   const taxAmount = itemsTotalAmount * taxRate;
 
   const cartTotalAmount = itemsTotalAmount + taxAmount;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (loggedInUser.id) {
+        const res = await axios.get(`api/orders/user/${loggedInUser.id}`);
+        const inCartOrders = res.data.filter(
+          (item) => item.orderStatus === "In-Cart"
+        );
+
+        const inCartOrdersProducts = inCartOrders[0]?.products.map(
+          (product) => {
+            return {
+              ...product.orderProduct,
+              imageURL: product.imageURL,
+              name: product.name,
+              id: product.orderProduct.productId,
+            };
+          }
+        );
+
+        setCartDB(inCartOrdersProducts);
+
+        // console.log("inCartOrdersProducts: ", inCartOrdersProducts);
+      }
+    };
+
+    fetchData().catch(console.error);
+  }, [loggedInUser, updatedOrders]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (loggedInUser.id && cartItems.length) {
+        const userId = { userId: loggedInUser.id };
+        const { data: createdOrder } = await axios.post(
+          "/api/orders/create",
+          userId
+        );
+
+        const cart = cartItems.map((item) => {
+          return {
+            ...item,
+            userId: createdOrder.userId,
+            orderId: createdOrder.id,
+            productId: item.id,
+          };
+        });
+
+        const { data: updatedOrders } = await axios.put(
+          "api/orders/update",
+          cart
+        );
+
+        setOrderId(updatedOrders[0].orderId);
+        setUpdatedOrders(updatedOrders);
+      }
+
+      if (!cartItems.length && orderId) {
+        await axios.delete(`/api/orders/delete/${orderId}`);
+      }
+    };
+
+    fetchData().catch(console.error);
+  }, [loggedInUser, cartItems]);
 
   const updateItemHandler = async (item, decrement) => {
     props.addToCart(item, decrement);
@@ -36,8 +115,6 @@ const Cart = (props) => {
   const removeItemHandler = (item) => {
     props.removeFromCart(item);
   };
-
-  const checkoutHandler = () => {};
 
   return (
     <Fragment>
@@ -51,7 +128,7 @@ const Cart = (props) => {
       <Row>
         <Col md={8}>
           {cartItems.length === 0 ? (
-            <div className="fs-5 ms-4">There are no items in your Cart.</div>
+            <div className="fs-5 ms-4">There are no items in your cart.</div>
           ) : (
             <ListGroup variant="flush">
               {cartItems.map((item) => (
@@ -133,7 +210,10 @@ const Cart = (props) => {
                   <Row>
                     <Col>Tax</Col>
                     <Col>
-                      ${cartItems.length === 0 ? 0 : taxAmount.toFixed(2)}
+                      $
+                      {cartItems.length === defaultTaxAmount.toFixed(2)
+                        ? 0
+                        : taxAmount.toFixed(2)}
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -170,6 +250,8 @@ const Cart = (props) => {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    // cartDB: state.cartDB,
+    loggedInUser: state.auth,
   };
 };
 
@@ -177,6 +259,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product, decrement) => dispatch(addToCart(product, decrement)),
     removeFromCart: (product) => dispatch(removeFromCart(product)),
+    // fetchDBCartThunk: (userId) => dispatch(fetchDBCartThunk(userId)),
   };
 };
 
