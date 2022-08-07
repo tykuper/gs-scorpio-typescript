@@ -1,12 +1,17 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { connect } from 'react-redux';
-import React from 'react';
-import { logout } from '../../store';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { connect } from "react-redux";
+import React from "react";
+import { logout } from "../../store";
+import { resetCart } from "../../store/cart";
 
-const UserNavbar = ({ user }) => {
+const UserNavbar = ({ user, resetCart }) => {
+  const resetCartHandler = () => {
+    resetCart();
+  };
+
   return (
     <Navbar className="bg-secondary" expand="lg">
       <Container>
@@ -19,7 +24,13 @@ const UserNavbar = ({ user }) => {
               <NavDropdown.Item href="#">Account</NavDropdown.Item>
               <NavDropdown.Item href="#">Orders</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/home" onClick={() => logout()}>
+              <NavDropdown.Item
+                href="/home"
+                onClick={() => {
+                  logout();
+                  resetCartHandler();
+                }}
+              >
                 Log-out
               </NavDropdown.Item>
             </NavDropdown>
@@ -36,4 +47,10 @@ const mapState = (state) => {
   };
 };
 
-export default connect(mapState)(UserNavbar);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    resetCart: () => dispatch(resetCart()),
+  };
+};
+
+export default connect(mapState, mapDispatchToProps)(UserNavbar);

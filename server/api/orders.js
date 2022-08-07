@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Order, Product, User },
+  models: { Order, Product, User, OrderProduct },
 } = require("../db");
 module.exports = router;
 
@@ -66,9 +66,10 @@ router.get("/user/:userId", async (req, res, next) => {
         },
       ],
     });
+
     res.json(orders);
   } catch (err) {
-    next(error);
+    next(err);
   }
 });
 
@@ -105,7 +106,7 @@ router.get("/user/:userId/open", async (req, res, next) => {
     });
     res.json(orders);
   } catch (err) {
-    next(error);
+    next(err);
   }
 });
 
@@ -142,6 +143,83 @@ router.get("/user/:userId/closed", async (req, res, next) => {
     });
     res.json(orders);
   } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/create", async (req, res, next) => {
+  const userId = req.body.userId;
+
+  try {
+    const [order, created] = await Order.findOrCreate({
+      where: { userId, orderStatus: "In-Cart" },
+      // defaults: req.body,
+    });
+
+    res.json(order);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/update/orderStatus/:orderId", async (req, res, next) => {
+  const orderId = req.params.orderId;
+
+  try {
+    const InCartOrder = await Order.findByPk(orderId, {
+      where: { orderStatus: "In-Cart" },
+    });
+
+    const updatedOrder = await InCartOrder.update({
+      orderStatus: "Processing",
+    });
+
+    res.json(updatedOrder);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put("/update", async (req, res, next) => {
+  const orderId = req.body[0].orderId;
+
+  try {
+    await OrderProduct.destroy({
+      where: {
+        orderId,
+      },
+    });
+
+    await Promise.all(
+      req.body.map((item) => {
+        OrderProduct.create(item);
+      })
+    );
+
+    res.json(req.body);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/delete/:orderId", async (req, res, next) => {
+  const orderId = req.params.orderId;
+
+  console.log(orderId);
+
+  try {
+    await OrderProduct.destroy({
+      where: {
+        orderId,
+      },
+    });
+
+    await Order.destroy({
+      where: {
+        id: orderId,
+      },
+    });
+  } catch (error) {
     next(error);
   }
 });
