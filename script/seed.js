@@ -52,6 +52,13 @@ async function seed() {
       firstName: "jack",
       lastName: "morgan",
     }),
+    User.create({
+      id: 999,
+      email: "guest@gmail.com",
+      password: "123",
+      firstName: "guest",
+      lastName: "guest",
+    }),
   ]);
 
   // Creating Products

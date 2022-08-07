@@ -66,6 +66,7 @@ router.get("/user/:userId", async (req, res, next) => {
         },
       ],
     });
+
     res.json(orders);
   } catch (err) {
     next(err);
@@ -158,6 +159,24 @@ router.post("/create", async (req, res, next) => {
     res.json(order);
   } catch (err) {
     next(err);
+  }
+});
+
+router.put("/update/orderStatus/:orderId", async (req, res, next) => {
+  const orderId = req.params.orderId;
+
+  try {
+    const InCartOrder = await Order.findByPk(orderId, {
+      where: { orderStatus: "In-Cart" },
+    });
+
+    const updatedOrder = await InCartOrder.update({
+      orderStatus: "Processing",
+    });
+
+    res.json(updatedOrder);
+  } catch (error) {
+    next(error);
   }
 });
 
