@@ -9,47 +9,32 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import GuestNavbar from './GuestNavbar';
 import UserNavbar from './UserNavbar';
 import AdminToolbar from './AdminToolbar';
+import { FaShoppingCart } from 'react-icons/fa';
+import { Badge } from 'react-bootstrap';
 
-const MainNavbar = ({ handleClick, isLoggedIn, isAdmin }) => {
+const MainNavbar = ({ handleClick, isLoggedIn, isAdmin, cart }) => {
+  const cartCount = cart.reduce((acc, curr) => acc + curr.quantity, 0);
+
   return (
-    <nav className="navbar navbar-expand-lg bg-secondary">
-      <div className="container-fluid">
-        <span>
-          <Link className="navbar-brand" to="/home">
-            Orca Audio
-          </Link>
-        </span>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <Link
-              className="nav-link active"
-              aria-current="page"
-              to="/products"
-            >
-              Products
-            </Link>
-          </ul>
-          <div className="d-flex">
+    <Navbar collapseOnSelect expand="lg" bg="secondary" variant="dark">
+      <Container>
+        <Navbar.Brand href="/home">Orca Audio</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/products">Products</Nav.Link>
+          </Nav>
+          <Nav>
             {isAdmin && <AdminToolbar />}
             {isLoggedIn ? <UserNavbar /> : <GuestNavbar />}
-            <Link className="nav-link active" aria-current="page" to="/cart">
-              Cart
-            </Link>
-          </div>
-        </div>
-      </div>
-    </nav>
+            <Nav.Link href="/cart">
+              <FaShoppingCart color="white" fontSize="25px" />
+              <Badge>{cartCount}</Badge>
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 };
 
@@ -60,6 +45,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     isAdmin: state.auth.isAdmin,
+    cart: state.cart,
   };
 };
 

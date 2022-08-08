@@ -1,20 +1,21 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
-import { withRouter, Route, Switch, Redirect } from "react-router-dom";
-import { Login, Signup } from "./components/AuthForm";
-import Home from "./components/Home";
-import { ConfirmationPageView } from "./views/confirmationPageView";
-import { me } from "./store";
-import checkOutView from "./views/checkOutView";
-import SingleProductView from "./views/SingleProductView";
-import ProductListView from "./views/ProductListView";
-import LogInView from "./views/logInView";
-import SignUpView from "./views/signUpView";
-import AddProductForm from "./components/AddProductForm";
-import EditProductForm from "./components/EditProductForm";
-import CartView from "./views/CartView";
-import optionalSignInView from "./views/optionalSignInView";
-import ShippingView from "./views/shippingView";
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Login, Signup } from './components/AuthForm';
+import Home from './components/Home';
+import { ConfirmationPageView } from './views/confirmationPageView';
+import { me } from './store';
+import checkOutView from './views/checkOutView';
+import SingleProductView from './views/SingleProductView';
+import ProductListView from './views/ProductListView';
+import LogInView from './views/logInView';
+import SignUpView from './views/signUpView';
+import AddProductForm from './components/AddProductForm';
+import EditProductForm from './components/EditProductForm';
+import CartView from './views/CartView';
+import orderHistoryView from './views/orderHistoryView';
+import optionalSignInView from './views/optionalSignInView';
+import ShippingView from './views/shippingView';
 
 /**
  * COMPONENT
@@ -50,6 +51,7 @@ class Routes extends Component {
           <Route path="/signin/optional" component={optionalSignInView} />
           <Route path="/login" component={LogInView} />
           <Route path="/signup" component={SignUpView} />
+          <Route path="/orders" component={orderHistoryView} />
           <Route path="/shipping" component={ShippingView} />
           <Route path="/manage/products/add" component={AddProductForm} />
           <Route

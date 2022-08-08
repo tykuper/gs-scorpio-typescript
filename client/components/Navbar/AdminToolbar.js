@@ -6,19 +6,15 @@ import React from 'react';
 
 const AdminToolbar = () => {
   return (
-    <Navbar className="bg-secondary" expand="lg">
-      <Container>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavDropdown title="Admin" id="basic-nav-dropdown">
-              <NavDropdown.Item href="/manage/products/add">
-                Add Product
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <Navbar.Collapse id="basic-navbar-nav">
+      <Nav className="me-auto">
+        <NavDropdown title="Admin" id="basic-nav-dropdown">
+          <NavDropdown.Item href="/manage/products/add">
+            Add Product
+          </NavDropdown.Item>
+        </NavDropdown>
+      </Nav>
+    </Navbar.Collapse>
   );
 };
 
