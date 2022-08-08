@@ -1,21 +1,23 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
-import { ConfirmationPageView } from './views/confirmationPageView';
-import { me } from './store';
-import checkOutView from './views/checkOutView';
-import SingleProductView from './views/SingleProductView';
-import ProductListView from './views/ProductListView';
-import LogInView from './views/logInView';
-import SignUpView from './views/signUpView';
-import AddProductForm from './components/AddProductForm';
-import EditProductForm from './components/EditProductForm';
-import CartView from './views/CartView';
-import orderHistoryView from './views/orderHistoryView';
-import optionalSignInView from './views/optionalSignInView';
-import ShippingView from './views/shippingView';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Login, Signup } from "./components/AuthForm";
+import Home from "./components/Home";
+import { ConfirmationPageView } from "./views/confirmationPageView";
+import { me } from "./store";
+import checkOutView from "./views/checkOutView";
+import SingleProductView from "./views/SingleProductView";
+import ProductListView from "./views/ProductListView";
+import LogInView from "./views/logInView";
+import SignUpView from "./views/signUpView";
+import AddProductForm from "./components/AddProductForm";
+import EditProductForm from "./components/EditProductForm";
+import CartView from "./views/CartView";
+import AdminProductsView from "./views/adminProductsView";
+import AdminUsersView from "./views/adminUsersView";
+import orderHistoryView from "./views/orderHistoryView";
+import optionalSignInView from "./views/optionalSignInView";
+import ShippingView from "./views/shippingView";
 
 /**
  * COMPONENT
@@ -58,6 +60,8 @@ class Routes extends Component {
             path="/manage/products/:productId(\d+)/edit"
             component={EditProductForm}
           />
+          <Route path="/manage/products" component={AdminProductsView} />
+          <Route path="/manage/users" component={AdminUsersView} />
           <Route path="/cart" component={CartView} />
           <Redirect to="/home" />
         </Switch>

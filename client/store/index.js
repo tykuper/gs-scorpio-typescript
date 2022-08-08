@@ -7,6 +7,7 @@ import singleProduct from "./singleProduct";
 import products from "./products";
 import cart from "./cart";
 import cartDB from "./cartDB";
+import users from "./users";
 import shipping from "./shipping";
 
 const reducer = combineReducers({
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   products,
   cart,
   cartDB,
+  users,
   shipping,
 });
 const middleware = composeWithDevTools(

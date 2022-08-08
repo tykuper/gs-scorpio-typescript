@@ -1,26 +1,34 @@
 import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
 import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { fetchProductsThunk } from "../store/products";
 import ProductCard from "../components/productCard";
 import { addToCart } from "../store/cart";
 import history from "../history.js";
 
-const ProductListView = (props) => {
+const AdminProductListView = (props) => {
   useEffect(() => {
     props.fetchProductsThunk();
   }, []);
 
-  const addToCartHandler = async (product) => {
-    const addedProduct = product;
-    props.addToCart(addedProduct);
+  const history = useHistory();
+
+  const addProduct = () => {
+    let path = `/manage/products/add`;
+    history.push(path);
   };
 
   return (
     <div className="text-center container py-5">
       <h4>
         <strong>Product List</strong>
+        <div>
+          <Button variant="primary" onClick={addProduct}>
+            Add a Product
+          </Button>
+        </div>
       </h4>
       <Row xs={1} md={2} lg={3} className="g-4">
         {props.products?.map((product) => {
@@ -28,7 +36,6 @@ const ProductListView = (props) => {
             <ProductCard
               key={product.id}
               product={product}
-              onClick={addToCartHandler}
               isAdmin={props.isAdmin}
             />
           );
@@ -38,7 +45,7 @@ const ProductListView = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapDispatchToState = (state) => {
   return {
     products: state.products,
     isAdmin: state.auth.isAdmin !== undefined ? state.auth.isAdmin : false,
@@ -52,4 +59,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductListView);
+export default connect(
+  mapDispatchToState,
+  mapDispatchToProps
+)(AdminProductListView);

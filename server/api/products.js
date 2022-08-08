@@ -64,7 +64,8 @@ router.post("/", async (req, res, next) => {
 
 router.delete("/:productId", async (req, res, next) => {
   try {
-    const user = await User.findByToken(req.body.token);
+    console.log("delete req.headers", req.headers);
+    const user = await User.findByToken(req.headers.authorization);
     const product = await Product.findByPk(req.params.productId);
     if (user && user.isAdmin) {
       if (product) {
@@ -85,6 +86,7 @@ router.delete("/:productId", async (req, res, next) => {
 
 router.put("/:productId", async (req, res, next) => {
   try {
+    console.log("put req.body", req.body);
     const user = await User.findByToken(req.body.token);
     const product = await Product.findByPk(req.params.productId);
     if (user && user.isAdmin) {

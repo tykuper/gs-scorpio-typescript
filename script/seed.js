@@ -135,7 +135,7 @@ async function seed() {
     Order.create({ isOpen: false, orderStatus: "Delivered", userId: 2 }),
     Order.create({ isOpen: true, orderStatus: "Shipping", userId: 3 }),
     Order.create({ isOpen: true, orderStatus: "Canceled", userId: 4 }),
-    Order.create({ isOpen: true, orderStatus: "Processing", userId: 2 }),
+    Order.create({ isOpen: true, orderStatus: "In-Cart", userId: 2 }),
   ]);
 
   const orderProduct = await Promise.all([

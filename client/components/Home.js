@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 /**
@@ -6,6 +6,39 @@ import { connect } from "react-redux";
  */
 export const Home = (props) => {
   // const { username } = props;
+  const loggedInUser = props.loggedInUser;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (
+        loggedInUser.id &&
+        (!localStorage.getItem("cartItems") ||
+          !JSON.parse(localStorage.getItem("cartItems"))?.length)
+      ) {
+        const res = await axios.get(`api/orders/user/${loggedInUser.id}`);
+
+        const inCartOrders = res.data.filter(
+          (item) => item.orderStatus === "In-Cart"
+        );
+
+        const inCartOrdersProducts = inCartOrders[0]?.products.map(
+          (product) => {
+            return {
+              ...product.orderProduct,
+              imageURL: product.imageURL,
+              name: product.name,
+              id: product.orderProduct.productId,
+            };
+          }
+        );
+
+        // setCartDB(res.data);
+        setCartDB(inCartOrdersProducts);
+
+        localStorage.setItem("cartItems", JSON.stringify(inCartOrdersProducts));
+      }
+    };
+  });
 
   return (
     <div className="row">
@@ -27,10 +60,10 @@ export const Home = (props) => {
 /**
  * CONTAINER
  */
-// const mapState = (state) => {
-//   return {
-//     username: state.auth.username,
-//   };
-// };
+const mapState = (state) => {
+  return {
+    loggedInUser: state.auth,
+  };
+};
 
-export default Home;
+export default connect(mapState, null)(Home);
