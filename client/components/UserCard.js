@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
+import React from "react";
+import { Col, Card } from "react-bootstrap";
 
 const ProductCard = (props) => {
   const { firstName, lastName, email, isCustomer, isAdmin } = props.users;
