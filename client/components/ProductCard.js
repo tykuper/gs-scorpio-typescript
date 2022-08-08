@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { addToCart } from "../store/cart";
 import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
@@ -34,33 +34,34 @@ const ProductCard = (props) => {
   return (
     <Col>
       <Card>
-        <Card.Img variant="top h-75" src={imageURL} />
-        <Card.Body>
-          <Card.Title>{name}</Card.Title>
-          <Card.Text>${price}</Card.Text>
-          {/* <Card.Text>{shortDescription}</Card.Text> */}
-          <ListGroup>
-            <Card.Link href={`/products/${id}`}>View Product</Card.Link>
-            {history.location.pathname !== "/manage/products" && (
-              <Button
-                variant="primary"
-                onClick={() => props.onClick(props.product)}
-              >
-                Add to Cart
+        <Link to={`/products/${id}`}>
+          <Card.Img variant="top h-75" src={imageURL} />
+          <Card.Body>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>${price}</Card.Text>
+            {/* <Card.Text>{shortDescription}</Card.Text> */}
+          </Card.Body>
+        </Link>
+        <Card.Footer>
+          {history.location.pathname !== "/manage/products" && (
+            <Button
+              variant="primary"
+              onClick={() => props.onClick(props.product)}
+            >
+              Add to Cart
+            </Button>
+          )}
+          {props.isAdmin && history.location.pathname === "/manage/products" && (
+            <Fragment>
+              <Button variant="warning" onClick={editProduct}>
+                Edit Product
               </Button>
-            )}
-            {props.isAdmin && history.location.pathname === "/manage/products" && (
-              <Fragment>
-                <Button variant="warning" onClick={editProduct}>
-                  Edit Product
-                </Button>
-                <Button variant="danger" onClick={() => deleteProduct(id)}>
-                  Delete Product
-                </Button>
-              </Fragment>
-            )}
-          </ListGroup>
-        </Card.Body>
+              <Button variant="danger" onClick={() => deleteProduct(id)}>
+                Delete Product
+              </Button>
+            </Fragment>
+          )}
+        </Card.Footer>
       </Card>
     </Col>
   );
