@@ -60,8 +60,6 @@ const CartSummary = (props) => {
       );
     }
 
-    console.log("DONE!!!!");
-
     props.removeFromCart(item);
   };
 

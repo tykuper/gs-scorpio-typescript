@@ -202,6 +202,28 @@ router.put("/update", async (req, res, next) => {
   }
 });
 
+// router.put("/update", async (req, res, next) => {
+//   const orderId = req.body[0].orderId;
+
+//   try {
+//     await OrderProduct.destroy({
+//       where: {
+//         orderId,
+//       },
+//     });
+
+//     await Promise.all(
+//       req.body.map((item) => {
+//         OrderProduct.create(item);
+//       })
+//     );
+
+//     res.json(req.body);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
 router.delete("/delete/:orderId", async (req, res, next) => {
   const orderId = req.params.orderId;
 
