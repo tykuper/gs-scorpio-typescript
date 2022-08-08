@@ -31,3 +31,33 @@ form div {
 .starReviews-width {
   width: 40%;
 }
+
+.returning-customers-width .new-customers-width {
+  width: 70%;
+}
+
+.divider-line {
+  border-left: 2px solid #c5cbd5;
+  margin-top: 0;
+  height: 150px;
+}
+
+.cia-divider {
+  width: 170px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+}
+
+.short-input-shipping {
+  width: 30%;
+}
+
+.email-input-shipping {
+  width: 50%;
+}
+.address-input-shipping {
+  width: 70%;
+}

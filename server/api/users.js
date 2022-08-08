@@ -23,3 +23,13 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
+
+router.post("/create", async (req, res, next) => {
+  try {
+    const newUser = await User.create(req.body);
+
+    res.json(newUser);
+  } catch (err) {
+    next(err);
+  }
+});
