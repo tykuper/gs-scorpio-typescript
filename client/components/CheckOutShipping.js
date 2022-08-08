@@ -51,7 +51,7 @@ const CheckOutShipping = (props) => {
 
         <Link
           style={{ textDecoration: "none" }}
-          to="#"
+          to="/shipping"
           className="d-flex justify-content-center"
         >
           <Button variant="secondary" type="button" className="mt-3">
