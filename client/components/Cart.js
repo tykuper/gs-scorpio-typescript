@@ -1,11 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
-import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { IoIosAdd, IoIosRemove, IoIosTrash } from "react-icons/io";
 import { connect } from "react-redux";
 import { addToCart, removeFromCart } from "../store/cart";
-import history from "../history";
 import axios from "axios";
 import CartSummary from "./CartSummary";
 
@@ -15,7 +10,9 @@ const Cart = (props) => {
 
   const loggedInUser = props.loggedInUser;
 
-  const localStorageCart = localStorage.getItem("cartItems");
+  const localStorageCart = localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [];
 
   const cartItems = props.cart;
 
@@ -49,7 +46,7 @@ const Cart = (props) => {
       }
 
       // get the latest cart data from DB
-      if (loggedInUser.id && !localStorageCart) {
+      if (loggedInUser.id && !localStorage.getItem("cartItems")) {
         const res = await axios.get(`api/orders/user/${loggedInUser.id}`);
 
         const inCartOrders = res.data.filter(

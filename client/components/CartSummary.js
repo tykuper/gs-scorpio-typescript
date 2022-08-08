@@ -6,12 +6,15 @@ import { IoIosAdd, IoIosRemove, IoIosTrash } from "react-icons/io";
 import { connect } from "react-redux";
 import { addToCart, includeOrderId, removeFromCart } from "../store/cart";
 import history from "../history";
+import { fetchShippingThunk } from "../store/shipping";
 
 const CartSummary = (props) => {
-  const { cartItems, check, includeOrderId, orderId } = props;
+  const { check, includeOrderId, orderId, loggedInUser } = props;
+  let cartItems = props.cartItems;
 
-  //   console.log(check);
-  //   console.log(cartItems);
+  // console.log(check);
+
+  console.log(cartItems);
 
   const itemsTotalCount = +cartItems.reduce(
     (acc, curr) => acc + curr.quantity,
@@ -28,6 +31,17 @@ const CartSummary = (props) => {
   const taxAmount = itemsTotalAmount * taxRate;
 
   const cartTotalAmount = itemsTotalAmount + taxAmount;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (loggedInUser.id) {
+        await props.fetchShippingThunk(loggedInUser.id);
+      } else {
+        localStorage.setItem("shipping", JSON.stringify({}));
+      }
+    };
+    fetchData();
+  }, [loggedInUser.id]);
 
   const updateItemHandler = async (item, decrement) => {
     props.addToCart(item, decrement);
@@ -118,7 +132,12 @@ const CartSummary = (props) => {
                 <ListGroup.Item className="border-0">
                   <Row>
                     <Col>Items x ({itemsTotalCount})</Col>
-                    <Col>${itemsTotalAmount.toFixed(2)}</Col>
+                    <Col>
+                      $
+                      {Number(itemsTotalAmount.toFixed(2)).toLocaleString(
+                        "en-US"
+                      )}
+                    </Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item className="border-0">
@@ -144,7 +163,12 @@ const CartSummary = (props) => {
                       <strong>Cart Total</strong>
                     </Col>
                     <Col>
-                      <strong>${cartTotalAmount.toFixed(2)}</strong>
+                      <strong>
+                        $
+                        {Number(cartTotalAmount.toFixed(2)).toLocaleString(
+                          "en-US"
+                        )}
+                      </strong>
                     </Col>
                   </Row>
                 </ListGroup.Item>
@@ -154,8 +178,13 @@ const CartSummary = (props) => {
                       type="button"
                       disabled={cartItems.length === 0}
                       onClick={() => {
+                        console.log(orderId);
                         includeOrderId(orderId);
-                        history.push("/checkout");
+                        if (loggedInUser.id) {
+                          history.push("/shipping");
+                        } else {
+                          history.push("/signin/optional");
+                        }
                       }}
                     >
                       Checkout
@@ -183,6 +212,7 @@ const mapDispatchToProps = (dispatch) => {
     addToCart: (product, decrement) => dispatch(addToCart(product, decrement)),
     removeFromCart: (product) => dispatch(removeFromCart(product)),
     includeOrderId: (orderId) => dispatch(includeOrderId(orderId)),
+    fetchShippingThunk: (userId) => dispatch(fetchShippingThunk(userId)),
   };
 };
 

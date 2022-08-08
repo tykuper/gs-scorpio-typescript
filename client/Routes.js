@@ -14,6 +14,8 @@ import AddProductForm from './components/AddProductForm';
 import EditProductForm from './components/EditProductForm';
 import CartView from './views/CartView';
 import orderHistoryView from './views/orderHistoryView';
+import optionalSignInView from './views/optionalSignInView';
+import ShippingView from './views/shippingView';
 
 /**
  * COMPONENT
@@ -46,9 +48,11 @@ class Routes extends Component {
           <Route path="/checkout" component={checkOutView} />
           <Route path="/products" component={ProductListView} />
           <Route path="/confirmed/:orderId" component={ConfirmationPageView} />
+          <Route path="/signin/optional" component={optionalSignInView} />
           <Route path="/login" component={LogInView} />
           <Route path="/signup" component={SignUpView} />
           <Route path="/orders" component={orderHistoryView} />
+          <Route path="/shipping" component={ShippingView} />
           <Route path="/manage/products/add" component={AddProductForm} />
           <Route
             path="/manage/products/:productId(\d+)/edit"

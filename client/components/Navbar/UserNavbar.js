@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { logout } from '../../store';
 import { resetCart } from '../../store/cart';
+import { resetShipping } from '../../store/shipping';
 
-const UserNavbar = ({ user, resetCart }) => {
-  const resetCartHandler = () => {
+const UserNavbar = ({ user, resetCart, resetShipping }) => {
+  const resetHandler = () => {
     resetCart();
+    resetShipping();
   };
 
   return (
@@ -17,13 +19,13 @@ const UserNavbar = ({ user, resetCart }) => {
       <Nav className="me-auto">
         <NavDropdown title={`Hi, ${user.firstName}`} id="basic-nav-dropdown">
           <NavDropdown.Item href="#">Account</NavDropdown.Item>
-          <NavDropdown.Item href="#">Orders</NavDropdown.Item>
+          <NavDropdown.Item href="/orders">Orders</NavDropdown.Item>
           <NavDropdown.Divider />
           <NavDropdown.Item
             href="/home"
             onClick={() => {
               logout();
-              resetCartHandler();
+              resetHandler();
             }}
           >
             Log-out
@@ -43,6 +45,7 @@ const mapState = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     resetCart: () => dispatch(resetCart()),
+    resetShipping: () => dispatch(resetShipping()),
   };
 };
 
