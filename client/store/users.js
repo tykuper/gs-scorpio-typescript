@@ -12,7 +12,8 @@ const fetchUsers = (users) => {
 export const fetchUsersThunk = () => {
   return async (dispatch) => {
     try {
-      const { data: users } = await axios.get("/api/users");
+      const token = window.localStorage.getItem("token");
+      const { data: users } = await axios.get("/api/users", { token });
       dispatch(fetchUsers(users));
     } catch (error) {
       console.log(error);

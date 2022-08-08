@@ -38,7 +38,7 @@ const ProductListView = (props) => {
   );
 };
 
-const mapDispatchToState = (state) => {
+const mapStateToProps = (state) => {
   return {
     products: state.products,
     isAdmin: state.auth.isAdmin !== undefined ? state.auth.isAdmin : false,
@@ -52,4 +52,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapDispatchToState, mapDispatchToProps)(ProductListView);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductListView);

@@ -14,6 +14,9 @@ const AdminToolbar = () => {
               <NavDropdown.Item href="/manage/products">
                 Manage Products
               </NavDropdown.Item>
+              <NavDropdown.Item href="/manage/users">
+                View Users
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
