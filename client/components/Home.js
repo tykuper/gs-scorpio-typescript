@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { setCart } from "../store/cart";
 
 /**
  * COMPONENT
@@ -7,9 +9,12 @@ import { connect } from "react-redux";
 export const Home = (props) => {
   // const { username } = props;
   const loggedInUser = props.loggedInUser;
+  const cartItems = props.cart;
 
   useEffect(() => {
+    console.log(loggedInUser.id);
     const fetchData = async () => {
+      console.log("Hello!");
       if (
         loggedInUser.id &&
         (!localStorage.getItem("cartItems") ||
@@ -21,24 +26,28 @@ export const Home = (props) => {
           (item) => item.orderStatus === "In-Cart"
         );
 
-        const inCartOrdersProducts = inCartOrders[0]?.products.map(
-          (product) => {
-            return {
-              ...product.orderProduct,
-              imageURL: product.imageURL,
-              name: product.name,
-              id: product.orderProduct.productId,
-            };
-          }
-        );
+        let inCartOrdersProducts = inCartOrders[0]?.products.map((product) => {
+          return {
+            ...product.orderProduct,
+            imageURL: product.imageURL,
+            name: product.name,
+            id: product.orderProduct.productId,
+          };
+        });
 
         // setCartDB(res.data);
-        setCartDB(inCartOrdersProducts);
+        // setCartDB(inCartOrdersProducts);
 
+        console.log("**CART from DB: ", inCartOrdersProducts);
+
+        inCartOrdersProducts = inCartOrdersProducts || [];
         localStorage.setItem("cartItems", JSON.stringify(inCartOrdersProducts));
+
+        props.setCart(inCartOrdersProducts);
       }
     };
-  });
+    fetchData().catch(console.error);
+  }, [loggedInUser]);
 
   return (
     <div className="row">
@@ -63,7 +72,14 @@ export const Home = (props) => {
 const mapState = (state) => {
   return {
     loggedInUser: state.auth,
+    cart: state.cart,
   };
 };
 
-export default connect(mapState, null)(Home);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCart: (cart) => dispatch(setCart(cart)),
+  };
+};
+
+export default connect(mapState, mapDispatchToProps)(Home);
