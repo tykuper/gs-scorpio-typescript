@@ -12,7 +12,7 @@ const optionalSignInView = (props) => {
       if (loggedInUser.id) {
         await props.fetchShippingThunk(loggedInUser.id);
       } else {
-        localStorage.setItem("shipping", JSON.stringify([]));
+        localStorage.setItem("shipping", JSON.stringify({}));
       }
     };
     fetchData();
