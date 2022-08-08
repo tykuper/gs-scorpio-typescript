@@ -13,6 +13,7 @@ import SignUpView from "./views/signUpView";
 import AddProductForm from "./components/AddProductForm";
 import EditProductForm from "./components/EditProductForm";
 import CartView from "./views/CartView";
+import AdminProductsView from "./views/adminProductsView";
 
 /**
  * COMPONENT
@@ -52,6 +53,7 @@ class Routes extends Component {
             path="/manage/products/:productId(\d+)/edit"
             component={EditProductForm}
           />
+          <Route path="/manage/products" component={AdminProductsView} />
           <Route path="/cart" component={CartView} />
           <Redirect to="/home" />
         </Switch>

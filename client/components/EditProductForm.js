@@ -46,7 +46,6 @@ class EditProductForm extends React.Component {
 
   render() {
     const { handleChange, handleSubmit } = this;
-    console.log(this.state);
 
     return (
       <div>

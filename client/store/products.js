@@ -74,8 +74,7 @@ export const deleteProductThunk = (productId, history) => async (dispatch) => {
       token
     );
     dispatch(deleteProduct(productId));
-    // need to figure out where to push
-    // history.push('/')
+    history.push("/manage/products");
   } catch (error) {
     console.log(error);
   }
