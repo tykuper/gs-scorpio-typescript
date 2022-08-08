@@ -40,7 +40,7 @@ const FAKE_CHECKOUT_DATA = {
 };
 
 const CheckOut = (props) => {
-  const cartItems = props.cart;
+  const { cart: cartItems, shipping, loggedInUser } = props;
 
   return (
     <Fragment>
@@ -54,12 +54,16 @@ const CheckOut = (props) => {
         <Col md={7}>
           <CheckOutOrders products={cartItems} />
 
-          <CheckOutShipping checkOutData={FAKE_CHECKOUT_DATA} />
+          <CheckOutShipping shipping={shipping} />
 
           <CheckOutPayment checkOutData={FAKE_CHECKOUT_DATA} />
         </Col>
         <Col md={4}>
-          <CheckOutSummary cartItems={cartItems} />
+          <CheckOutSummary
+            cartItems={cartItems}
+            loggedInUser={loggedInUser}
+            shipping={shipping}
+          />
         </Col>
       </Row>
     </Fragment>
@@ -69,6 +73,8 @@ const CheckOut = (props) => {
 const mapStateToProps = (state) => {
   return {
     cart: state.cart,
+    shipping: state.shipping,
+    loggedInUser: state.auth,
   };
 };
 

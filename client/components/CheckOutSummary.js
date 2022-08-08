@@ -2,14 +2,13 @@ import axios from "axios";
 import React from "react";
 import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import history from "../history";
 import { resetCart } from "../store/cart";
 
 const CheckOutSummary = (props) => {
-  const cartItems = props.cartItems;
+  const { cartItems, loggedInUser, shipping } = props;
 
-  const orderId = cartItems[0].orderId;
+  const orderId = cartItems[0]?.orderId;
 
   const itemsTotalCount = +cartItems.reduce(
     (acc, curr) => acc + curr.quantity,
@@ -26,9 +25,33 @@ const CheckOutSummary = (props) => {
 
   const cartTotalAmount = itemsTotalAmount + taxAmount;
 
+  console.log(cartItems);
+
   const placeOrderHandler = async (orderId, cartItems) => {
-    if (!orderId) {
-      const TEMPORARY_GUEST_USER_ID = { userId: 999 };
+    if (!loggedInUser.id) {
+      const newUserInfo = {
+        email: shipping.email,
+        password: shipping.email,
+        firstName: shipping.firstName,
+        lastName: shipping.lastName,
+      };
+      const newUser = await axios.post("/api/users/create", newUserInfo);
+
+      const newShippingInfo = {
+        address: shipping.address,
+        city: shipping.city,
+        state: shipping.state,
+        country: shipping.country,
+        zipcode: shipping.zipcode,
+        userId: newUser.data.id,
+      };
+
+      const newShipping = await axios.post(
+        "/api/shipping/create",
+        newShippingInfo
+      );
+
+      const TEMPORARY_GUEST_USER_ID = { userId: newUser.data.id };
 
       //create new order in Order Table
       const { data: createdOrder } = await axios.post(
@@ -54,8 +77,13 @@ const CheckOutSummary = (props) => {
       orderId = createdOrder.id;
     }
 
-    await axios.put(`/api/orders/update/orderStatus/${orderId}`);
-    props.resetCart();
+    const updated = await axios.put(
+      `/api/orders/update/orderStatus/${orderId}`
+    );
+
+    if (updated) {
+      props.resetCart();
+    }
     history.push(`confirmed/${orderId}`);
   };
 
@@ -67,7 +95,9 @@ const CheckOutSummary = (props) => {
           <ListGroup.Item className="border-0">
             <Row>
               <Col>Items</Col>
-              <Col>${itemsTotalAmount.toFixed(2)}</Col>
+              <Col>
+                ${Number(itemsTotalAmount.toFixed(2)).toLocaleString("en-US")}
+              </Col>
             </Row>
           </ListGroup.Item>
           <ListGroup.Item className="border-0">

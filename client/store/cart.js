@@ -56,8 +56,8 @@ export default function (state = initialState, action) {
       return removedCart;
 
     case RESET_CART:
-      localStorage.setItem("cartItems", []);
-      return state;
+      localStorage.setItem("cartItems", JSON.stringify([]));
+      return [];
 
     case INCLUDE_ORDERID:
       const orderIdAddedState = action.orderId

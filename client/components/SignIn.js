@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { authenticate } from "../store";
 
 /**
@@ -9,14 +10,15 @@ const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
 
   return (
-    <div>
+    <div className="returning-customers-width">
       {name === "signup" ? (
         <div className="m-2">
           <h1>Sign Up</h1>
         </div>
       ) : (
-        <div className="m-2">
-          <h1>Log In</h1>
+        <div className="m-2 text-center">
+          <h3>Returning Customers</h3>
+          <h6>Sign in for faster checkout</h6>
         </div>
       )}
       <form
@@ -52,7 +54,7 @@ const AuthForm = (props) => {
           </div>
         ) : null}
         <div>
-          <div className="col-md-4 m-4">
+          <div className="col-md-10 m-4 d-block">
             <label htmlFor="email" className="form-label">
               Email
             </label>
@@ -63,7 +65,7 @@ const AuthForm = (props) => {
               required
             />
           </div>
-          <div className="col-md-4 m-4">
+          <div className="col-md-10 m-4 d-block">
             <label htmlFor="password" className="form-label">
               Password
             </label>
@@ -74,11 +76,18 @@ const AuthForm = (props) => {
               required
             />
           </div>
-          <div className="d-block">
-            <button className="btn btn-primary" type="submit">
-              {displayName}
-            </button>
+          <div className="d-flex justify-content-between align-items-center">
+            <Link to="/shipping">
+              <button className="btn btn-primary ms-2" type="submit">
+                {displayName}
+              </button>
+            </Link>
+            <Link style={{ textDecoration: "none" }} to="/signup">
+              <strong>Create Account</strong>
+            </Link>
           </div>
+        </div>
+        <div className="d-block">
           {error && error.response && <div> {error.response.data} </div>}
         </div>
       </form>
@@ -96,7 +105,7 @@ const AuthForm = (props) => {
 const mapLogin = (state) => {
   return {
     name: "login",
-    displayName: "Login",
+    displayName: "Sign In",
     error: state.auth.error,
   };
 };
