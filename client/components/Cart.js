@@ -27,6 +27,9 @@ const Cart = (props) => {
           userId
         );
 
+        // if (!loggedInUser && localStorageCart.length) {
+        // }
+
         const cart = cartItems.map((item) => {
           return {
             ...item,
@@ -69,7 +72,7 @@ const Cart = (props) => {
         // setCartDB(res.data);
         setCartDB(inCartOrdersProducts);
 
-        console.log("**CART from DB: ", inCartOrdersProducts);
+        console.log("**CART Page from DB: ", inCartOrdersProducts);
 
         inCartOrdersProducts = inCartOrdersProducts || [];
         localStorage.setItem("cartItems", JSON.stringify(inCartOrdersProducts));
