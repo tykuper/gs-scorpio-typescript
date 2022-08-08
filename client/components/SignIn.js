@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, StaticRouter } from "react-router-dom";
+import history from "../history";
 import { authenticate } from "../store";
 
 /**
  * COMPONENT
  */
-const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error } = props;
+const SignIn = (props) => {
+  const { name, displayName, handleSubmit, error, loggedInUser } = props;
+
+  // useEffect(() => {
+  //   if (loggedInUser.id) {
+  //     history.push("/shipping");
+  //   }
+  // }, [loggedInUser]);
 
   return (
     <div className="returning-customers-width">
@@ -77,11 +84,9 @@ const AuthForm = (props) => {
             />
           </div>
           <div className="d-flex justify-content-between align-items-center">
-            <Link to="/shipping">
-              <button className="btn btn-primary ms-2" type="submit">
-                {displayName}
-              </button>
-            </Link>
+            <button className="btn btn-primary ms-2" type="submit">
+              {displayName}
+            </button>
             <Link style={{ textDecoration: "none" }} to="/signup">
               <strong>Create Account</strong>
             </Link>
@@ -107,6 +112,7 @@ const mapLogin = (state) => {
     name: "login",
     displayName: "Sign In",
     error: state.auth.error,
+    loggedInUser: state.auth,
   };
 };
 
@@ -131,10 +137,15 @@ const mapDispatch = (dispatch) => {
       const formName = evt.target.name;
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(email, password, firstName, lastName, formName));
+
+      const route = "cart";
+
+      dispatch(
+        authenticate(email, password, firstName, lastName, formName, route)
+      );
     },
   };
 };
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm);
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
+export const Login = connect(mapLogin, mapDispatch)(SignIn);
+export const Signup = connect(mapSignup, mapDispatch)(SignIn);
