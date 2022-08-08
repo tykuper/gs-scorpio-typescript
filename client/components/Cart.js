@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { addToCart, removeFromCart } from "../store/cart";
+import { addToCart, removeFromCart, setCart } from "../store/cart";
 import axios from "axios";
 import CartSummary from "./CartSummary";
 
@@ -10,7 +10,7 @@ const Cart = (props) => {
 
   const loggedInUser = props.loggedInUser;
 
-  const localStorageCart = localStorage.getItem("cartItems")
+  let localStorageCart = localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [];
 
@@ -18,7 +18,7 @@ const Cart = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (loggedInUser.id && cartItems.length) {
+      if (loggedInUser.id && cartItems?.length) {
         const userId = { userId: loggedInUser.id };
 
         //create new order in Order Table
@@ -46,34 +46,42 @@ const Cart = (props) => {
       }
 
       // get the latest cart data from DB
-      if (loggedInUser.id && !localStorage.getItem("cartItems")) {
+
+      if (
+        loggedInUser.id &&
+        (!localStorage.getItem("cartItems") ||
+          !JSON.parse(localStorage.getItem("cartItems"))?.length)
+      ) {
         const res = await axios.get(`api/orders/user/${loggedInUser.id}`);
 
         const inCartOrders = res.data.filter(
           (item) => item.orderStatus === "In-Cart"
         );
 
-        const inCartOrdersProducts = inCartOrders[0]?.products.map(
-          (product) => {
-            return {
-              ...product.orderProduct,
-              imageURL: product.imageURL,
-              name: product.name,
-              id: product.orderProduct.productId,
-            };
-          }
-        );
+        let inCartOrdersProducts = inCartOrders[0]?.products.map((product) => {
+          return {
+            ...product.orderProduct,
+            imageURL: product.imageURL,
+            name: product.name,
+            id: product.orderProduct.productId,
+          };
+        });
 
         // setCartDB(res.data);
         setCartDB(inCartOrdersProducts);
 
+        console.log("**CART from DB: ", inCartOrdersProducts);
+
+        inCartOrdersProducts = inCartOrdersProducts || [];
         localStorage.setItem("cartItems", JSON.stringify(inCartOrdersProducts));
+
+        // props.setCart(inCartOrdersProducts);
       }
 
       //delete orders from DB.
-      if (!cartItems.length && orderId) {
-        await axios.delete(`/api/orders/delete/${orderId}`);
-      }
+      // if (!cartItems.length && orderId) {
+      //   await axios.delete(`/api/orders/delete/${orderId}`);
+      // }
     };
 
     fetchData().catch(console.error);
@@ -109,6 +117,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (product, decrement) => dispatch(addToCart(product, decrement)),
     removeFromCart: (product) => dispatch(removeFromCart(product)),
+    setCart: (cart) => dispatch(setCart(cart)),
   };
 };
 

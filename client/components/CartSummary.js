@@ -4,17 +4,21 @@ import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { IoIosAdd, IoIosRemove, IoIosTrash } from "react-icons/io";
 import { connect } from "react-redux";
-import { addToCart, includeOrderId, removeFromCart } from "../store/cart";
+import {
+  addToCart,
+  includeOrderId,
+  removeFromCart,
+  resetCartThunk,
+} from "../store/cart";
 import history from "../history";
 import { fetchShippingThunk } from "../store/shipping";
+import axios from "axios";
 
 const CartSummary = (props) => {
   const { check, includeOrderId, orderId, loggedInUser } = props;
-  let cartItems = props.cartItems;
+  let cartItems = props?.cartItems || [];
 
   // console.log(check);
-
-  console.log(cartItems);
 
   const itemsTotalCount = +cartItems.reduce(
     (acc, curr) => acc + curr.quantity,
@@ -47,7 +51,17 @@ const CartSummary = (props) => {
     props.addToCart(item, decrement);
   };
 
-  const removeItemHandler = (item) => {
+  const removeItemHandler = async (item) => {
+    console.log(loggedInUser.id, item, orderId);
+    if (loggedInUser.id && item && orderId) {
+      // props.resetCartThunk(item, orderId);
+      const res = await axios.delete(
+        `/api/orders/delete/${orderId}/product-delete/${item.id}`
+      );
+    }
+
+    console.log("DONE!!!!");
+
     props.removeFromCart(item);
   };
 
@@ -213,6 +227,8 @@ const mapDispatchToProps = (dispatch) => {
     removeFromCart: (product) => dispatch(removeFromCart(product)),
     includeOrderId: (orderId) => dispatch(includeOrderId(orderId)),
     fetchShippingThunk: (userId) => dispatch(fetchShippingThunk(userId)),
+    resetCartThunk: (product, orderId) =>
+      dispatch(resetCartThunk(product, orderId)),
   };
 };
 

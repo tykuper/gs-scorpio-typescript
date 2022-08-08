@@ -25,8 +25,6 @@ const CheckOutSummary = (props) => {
 
   const cartTotalAmount = itemsTotalAmount + taxAmount;
 
-  console.log(cartItems);
-
   const placeOrderHandler = async (orderId, cartItems) => {
     if (!loggedInUser.id) {
       const newUserInfo = {
@@ -127,6 +125,7 @@ const CheckOutSummary = (props) => {
               <Button
                 type="button"
                 onClick={() => placeOrderHandler(orderId, cartItems)}
+                disabled={!orderId}
               >
                 Place Order
               </Button>

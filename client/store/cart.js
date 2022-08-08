@@ -4,6 +4,7 @@ const ADD_TO_CART = "ADD_TO_CART";
 const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 const RESET_CART = "RESET_CART";
 const INCLUDE_ORDERID = "INCLUDE_ORDERID";
+const SET_CART = "SET_CART";
 
 export function addToCart(product, decrement = false) {
   return { type: ADD_TO_CART, product, decrement };
@@ -17,10 +18,24 @@ export function resetCart() {
 export function includeOrderId(orderId) {
   return { type: INCLUDE_ORDERID, orderId };
 }
+export function setCart(cart) {
+  return { type: SET_CART, cart };
+}
 
 const initialState = localStorage.getItem("cartItems")
   ? JSON.parse(localStorage.getItem("cartItems"))
   : [];
+
+export const resetCartThunk = (product, orderId) => async (dispatch) => {
+  try {
+    // const res =
+    //   await axios.delete(`/api/orders/delete/${orderId}/product-delete/${product.productId}
+    // `);
+    // dispatch(removeFromCart(product));
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -47,7 +62,10 @@ export default function (state = initialState, action) {
 
     case REMOVE_FROM_CART:
       const itemToBeRemoved = action.product;
-      const removedCart = state.filter(
+
+      console.log(itemToBeRemoved);
+
+      let removedCart = state.filter(
         (product) => product.id !== itemToBeRemoved.id
       );
 
@@ -58,6 +76,9 @@ export default function (state = initialState, action) {
     case RESET_CART:
       localStorage.setItem("cartItems", JSON.stringify([]));
       return [];
+
+    case SET_CART:
+      return action.cart;
 
     case INCLUDE_ORDERID:
       const orderIdAddedState = action.orderId

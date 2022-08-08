@@ -223,3 +223,38 @@ router.delete("/delete/:orderId", async (req, res, next) => {
     next(error);
   }
 });
+
+router.delete(
+  "/delete/:orderId/product-delete/:productId",
+  async (req, res, next) => {
+    const orderId = req.params.orderId;
+    const productId = req.params.productId;
+
+    try {
+      await OrderProduct.destroy({
+        where: {
+          orderId,
+          productId,
+        },
+      });
+
+      const orderProducts = await OrderProduct.findAll({
+        where: {
+          orderId,
+        },
+      });
+
+      if (!orderProducts.length) {
+        await Order.destroy({
+          where: {
+            id: orderId,
+          },
+        });
+      }
+
+      res.sendStatus(200);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
