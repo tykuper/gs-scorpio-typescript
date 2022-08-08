@@ -5,18 +5,36 @@ import { Helmet } from "react-helmet-async";
 import history from "../history";
 
 const ShippingInfoForm = (props) => {
-  const { shippingInfo, loggedInUser, fetchShippingThunk, setShipping } = props;
+  const { shippingInfo, loggedInUser, setShipping } = props;
+
+  const shippingLocalStorage = localStorage.getItem("shipping")
+    ? JSON.parse(localStorage.getItem("shipping"))
+    : {};
 
   const [firstName, setFirstName] = useState(
-    shippingInfo.user?.firstName || ""
+    shippingInfo.user?.firstName || shippingLocalStorage.firstName || ""
   );
-  const [lastName, setLastName] = useState(shippingInfo.user?.lastName || "");
-  const [email, setEmail] = useState(shippingInfo.user?.email || "");
-  const [address, setAddress] = useState(shippingInfo.address || "");
-  const [city, setCity] = useState(shippingInfo.city || "");
-  const [state, setState] = useState(shippingInfo.state || "");
-  const [country, setCountry] = useState(shippingInfo.country || "");
-  const [zipCode, setZipCode] = useState(shippingInfo.zipcode || "");
+  const [lastName, setLastName] = useState(
+    shippingInfo.user?.lastName || shippingLocalStorage.lastName || ""
+  );
+  const [email, setEmail] = useState(
+    shippingInfo.user?.email || shippingLocalStorage.email || ""
+  );
+  const [address, setAddress] = useState(
+    shippingInfo.address || shippingLocalStorage.address || ""
+  );
+  const [city, setCity] = useState(
+    shippingInfo.city || shippingLocalStorage.city || ""
+  );
+  const [state, setState] = useState(
+    shippingInfo.state || shippingLocalStorage.state || ""
+  );
+  const [country, setCountry] = useState(
+    shippingInfo.country || shippingLocalStorage.country || ""
+  );
+  const [zipCode, setZipCode] = useState(
+    shippingInfo.zipcode || shippingLocalStorage.zipCode || ""
+  );
 
   const submitHandler = async (e) => {
     e.preventDefault();
