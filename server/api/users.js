@@ -6,19 +6,18 @@ module.exports = router;
 
 router.get("/", async (req, res, next) => {
   try {
-    console.log("req.body", req.body);
-    // const user = await User.findByToken(req.body.token);
-    // if (user && user.isAdmin) {
-    const users = await User.findAll({
-      include: [{ model: Order, as: "orders" }],
-    });
-    res.json(users);
-    // } else {
-    //   const users = await User.findAll({
-    //     attributes: ["id", "firstName", "lastName", "email"],
-    //   });
-    //   res.json(users);
-    // }
+    console.log("get req.headers", req.headers);
+    const user = await User.findByToken(req.headers.authorization);
+    if (user.isAdmin) {
+      const users = await User.findAll({
+        include: [{ model: Order, as: "orders" }],
+      });
+      res.json(users);
+    } else {
+      const error = Error("Not authorized to view users");
+      error.status = 401;
+      throw error;
+    }
   } catch (error) {
     next(error);
   }

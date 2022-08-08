@@ -64,20 +64,21 @@ router.post("/", async (req, res, next) => {
 
 router.delete("/:productId", async (req, res, next) => {
   try {
-    // const user = await User.findByToken(req.body.token);
+    console.log("delete req.headers", req.headers);
+    const user = await User.findByToken(req.headers.authorization);
     const product = await Product.findByPk(req.params.productId);
-    // if (user && user.isAdmin) {
-    if (product) {
-      await product.destroy();
-      res.status(204).send(product);
+    if (user && user.isAdmin) {
+      if (product) {
+        await product.destroy();
+        res.status(204).send(product);
+      } else {
+        res.status(404).send("Not Found");
+      }
     } else {
-      res.status(404).send("Not Found");
+      const error = Error("Not authorized to delete product");
+      error.status = 401;
+      throw error;
     }
-    // } else {
-    //   const error = Error("Not authorized to delete product");
-    //   error.status = 401;
-    //   throw error;
-    // }
   } catch (err) {
     next(err);
   }
@@ -85,6 +86,7 @@ router.delete("/:productId", async (req, res, next) => {
 
 router.put("/:productId", async (req, res, next) => {
   try {
+    console.log("put req.body", req.body);
     const user = await User.findByToken(req.body.token);
     const product = await Product.findByPk(req.params.productId);
     if (user && user.isAdmin) {

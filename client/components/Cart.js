@@ -46,7 +46,11 @@ const Cart = (props) => {
       }
 
       // get the latest cart data from DB
-      if (loggedInUser.id && !localStorage.getItem("cartItems")) {
+      if (
+        loggedInUser.id &&
+        (!localStorage.getItem("cartItems") ||
+          !JSON.parse(localStorage.getItem("cartItems"))?.length)
+      ) {
         const res = await axios.get(`api/orders/user/${loggedInUser.id}`);
 
         const inCartOrders = res.data.filter(

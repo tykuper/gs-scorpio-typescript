@@ -69,12 +69,14 @@ export const updateProductThunk = (product, history) => async (dispatch) => {
 export const deleteProductThunk = (productId, history) => async (dispatch) => {
   try {
     const token = window.localStorage.getItem("token");
-    const { data: deletedProduct } = await axios.delete(
-      `/api/products/${productId}`,
-      { token }
-    );
-    dispatch(deleteProduct(productId));
-    // history.push("/manage/products");
+    console.log("TOKEN", token);
+    if (token) {
+      await axios.delete(`/api/products/${productId}`, {
+        headers: { authorization: token },
+      });
+      dispatch(deleteProduct(productId));
+      // history.push("/manage/products");
+    }
   } catch (error) {
     console.log(error);
   }

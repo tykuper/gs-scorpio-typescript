@@ -55,7 +55,7 @@ class EditProductForm extends React.Component {
         <form
           onSubmit={handleSubmit}
           className="row needs-validation"
-          novalidate
+          noValidate
         >
           <div className="col-md-4 m-4">
             <label htmlFor="name" className="form-label">

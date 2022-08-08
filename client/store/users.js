@@ -13,8 +13,12 @@ export const fetchUsersThunk = () => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem("token");
-      const { data: users } = await axios.get("/api/users", { token });
-      dispatch(fetchUsers(users));
+      if (token) {
+        const { data: users } = await axios.get("/api/users", {
+          headers: { authorization: token },
+        });
+        dispatch(fetchUsers(users));
+      }
     } catch (error) {
       console.log(error);
     }

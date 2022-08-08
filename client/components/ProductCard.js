@@ -56,7 +56,12 @@ const ProductCard = (props) => {
               <Button variant="warning" onClick={editProduct}>
                 Edit Product
               </Button>
-              <Button variant="danger" onClick={() => deleteProduct(id)}>
+              <Button
+                variant="danger"
+                onClick={() => {
+                  deleteProduct(id);
+                }}
+              >
                 Delete Product
               </Button>
             </Fragment>
