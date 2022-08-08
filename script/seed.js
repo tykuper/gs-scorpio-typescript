@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product, OrderProduct, Order },
+  models: { User, Product, OrderProduct, Order, Shipping },
 } = require("../server/db");
 
 /**
@@ -21,36 +21,42 @@ async function seed() {
       firstName: "admin",
       lastName: "account",
       isAdmin: true,
+      shippingId: 1,
     }),
     User.create({
       email: "cody.smith@gmail.com",
       password: "123",
       firstName: "cody",
       lastName: "smith",
+      shippingId: 2,
     }),
     User.create({
       email: "john.doe@gmail.com",
       password: "123",
       firstName: "john",
       lastName: "doe",
+      shippingId: 3,
     }),
     User.create({
       email: "alex.domingo@gmail.com",
       password: "123",
       firstName: "alex",
       lastName: "domingo",
+      shippingId: 4,
     }),
     User.create({
       email: "anna.riley@gmail.com",
       password: "123",
       firstName: "anna",
       lastName: "riley",
+      shippingId: 5,
     }),
     User.create({
       email: "jack.morgan@gmail.com",
       password: "123",
       firstName: "jack",
       lastName: "morgan",
+      shippingId: 6,
     }),
     User.create({
       id: 999,
@@ -58,6 +64,7 @@ async function seed() {
       password: "123",
       firstName: "guest",
       lastName: "guest",
+      shippingId: 7,
     }),
   ]);
 
@@ -173,6 +180,65 @@ async function seed() {
       quantity: 2,
       productId: 4,
       orderId: 5,
+    }),
+  ]);
+
+  const shipping = await Promise.all([
+    Shipping.create({
+      address: "3975 Hart Ridge Road",
+      city: "Saginaw",
+      state: "MI",
+      country: "USA",
+      zipcode: "48607",
+      userId: 1,
+    }),
+    Shipping.create({
+      address: "2262 John Avenue",
+      city: "East Lansing",
+      state: "MI",
+      country: "USA",
+      zipcode: "48823",
+      userId: 2,
+    }),
+    Shipping.create({
+      address: "4249 Ashmor Drive",
+      city: "Cohasset",
+      state: "MN",
+      country: "USA",
+      zipcode: "55721",
+      userId: 3,
+    }),
+    Shipping.create({
+      address: "528 Strother Street",
+      city: "Millport",
+      state: "AL",
+      country: "USA",
+      zipcode: "35576",
+      userId: 4,
+    }),
+    Shipping.create({
+      address: "2757 Kincheloe Road",
+      city: "Portland",
+      state: "OR",
+      country: "USA",
+      zipcode: "97204",
+      userId: 5,
+    }),
+    Shipping.create({
+      address: "2130 Locust Court",
+      city: "Santa Fe Springs",
+      state: "CA",
+      country: "USA",
+      zipcode: "90670",
+      userId: 6,
+    }),
+    Shipping.create({
+      address: "2282 Holt Street",
+      city: "Miramar",
+      state: "FL",
+      country: "USA",
+      zipcode: "33025",
+      userId: 999,
     }),
   ]);
 

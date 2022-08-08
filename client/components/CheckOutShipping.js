@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 const CheckOutShipping = (props) => {
-  const checkOutData = props.checkOutData;
+  const shipping = props.shipping;
+
+  const fullAddress =
+    shipping.address +
+    " " +
+    shipping.city +
+    " " +
+    shipping.state +
+    " " +
+    shipping.country +
+    " " +
+    shipping.zipcode;
+
   return (
     <Card className="mb-3">
       <Card.Body className="d-grid gap-3">
@@ -13,7 +26,7 @@ const CheckOutShipping = (props) => {
           <Row>
             <Col>
               <strong>Name: </strong>
-              {checkOutData.firstName + " " + checkOutData.lastName}
+              {shipping.firstName + " " + shipping.lastName}
             </Col>
           </Row>
         </ListGroup.Item>
@@ -22,7 +35,7 @@ const CheckOutShipping = (props) => {
           <Row>
             <Col>
               <strong>Email: </strong>
-              {checkOutData.email}
+              {shipping.email}
             </Col>
           </Row>
         </ListGroup.Item>
@@ -31,7 +44,7 @@ const CheckOutShipping = (props) => {
           <Row>
             <Col>
               <strong>Address: </strong>
-              {checkOutData.address}
+              {fullAddress}
             </Col>
           </Row>
         </ListGroup.Item>
@@ -50,4 +63,10 @@ const CheckOutShipping = (props) => {
   );
 };
 
-export default CheckOutShipping;
+const mapStateToProps = (state) => {
+  return {
+    shipping: state.shipping,
+  };
+};
+
+export default connect(mapStateToProps)(CheckOutShipping);

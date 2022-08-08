@@ -6,10 +6,12 @@ import { connect } from "react-redux";
 import React from "react";
 import { logout } from "../../store";
 import { resetCart } from "../../store/cart";
+import { resetShipping } from "../../store/shipping";
 
-const UserNavbar = ({ user, resetCart }) => {
-  const resetCartHandler = () => {
+const UserNavbar = ({ user, resetCart, resetShipping }) => {
+  const resetHandler = () => {
     resetCart();
+    resetShipping();
   };
 
   return (
@@ -28,7 +30,7 @@ const UserNavbar = ({ user, resetCart }) => {
                 href="/home"
                 onClick={() => {
                   logout();
-                  resetCartHandler();
+                  resetHandler();
                 }}
               >
                 Log-out
@@ -50,6 +52,7 @@ const mapState = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     resetCart: () => dispatch(resetCart()),
+    resetShipping: () => dispatch(resetShipping()),
   };
 };
 
