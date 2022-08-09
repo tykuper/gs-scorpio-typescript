@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import history from "../history";
+import PaymentsButton from "./PaymentsButton";
 
 const ShippingInfoForm = (props) => {
   const { shippingInfo, loggedInUser, setShipping } = props;
@@ -125,7 +126,7 @@ const ShippingInfoForm = (props) => {
       JSON.stringify(updatedShippingInfoAndUserInfo)
     );
 
-    history.push("/checkout");
+    // history.push("/checkout");
   };
 
   return (
@@ -228,9 +229,7 @@ const ShippingInfoForm = (props) => {
           </div>
 
           <div className="d-flex flex-column align-items-center">
-            <Button variant="primary" type="submit">
-              Continue to Payment
-            </Button>
+            <PaymentsButton />
           </div>
         </Form>
       </div>
