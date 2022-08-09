@@ -6,13 +6,13 @@ import Home from "./components/Home";
 import { ConfirmationPageView } from "./views/confirmationPageView";
 import { me } from "./store";
 import checkOutView from "./views/checkOutView";
-import SingleProductView from "./views/SingleProductView";
-import ProductListView from "./views/ProductListView";
+import SingleProductView from "./views/singleProductView";
+import ProductListView from "./views/productListView";
 import LogInView from "./views/logInView";
 import SignUpView from "./views/signUpView";
 import AddProductForm from "./components/AddProductForm";
 import EditProductForm from "./components/EditProductForm";
-import CartView from "./views/CartView";
+import CartView from "./views/cartView";
 import AdminProductsView from "./views/adminProductsView";
 import AdminUsersView from "./views/adminUsersView";
 import orderHistoryView from "./views/orderHistoryView";
@@ -20,6 +20,9 @@ import optionalSignInView from "./views/optionalSignInView";
 import ShippingView from "./views/shippingView";
 import NotFound from "./components/NotFound";
 import NotAuthorized from "./components/NotAuthorized";
+
+import "@stripe/stripe-js";
+import paymentView from "./views/paymentView";
 
 /**
  * COMPONENT
@@ -46,6 +49,9 @@ class Routes extends Component {
           <Route path="/orders" component={orderHistoryView} />
           <Route path="/shipping" component={ShippingView} />
           <Route path="/cart" component={CartView} />
+
+          <Route path="/payments" component={paymentView} />
+
           <Route exact path="/" component={Home} />
           <Route component={NotFound} />
           {isAdmin ? (
