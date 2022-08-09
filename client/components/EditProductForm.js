@@ -33,6 +33,7 @@ class EditProductForm extends React.Component {
 
   render() {
     const { handleChange, handleSubmit } = this;
+    console.log(this.props.product);
 
     return this.props.product ? (
       <div>
@@ -70,14 +71,17 @@ class EditProductForm extends React.Component {
             />
           </div>
           <div className="col-md-4 m-4">
-            <label htmlFor="shortDescription" className="form-label">
-              Short Description
+            <label htmlFor="inventory" className="form-label">
+              Inventory
             </label>
             <input
-              name="shortDescription"
-              type="text"
+              name="inventory"
+              type="number"
               className="form-control"
-              defaultValue={this.props.product.shortDescription}
+              step="1"
+              min="0"
+              max="999"
+              defaultValue={this.props.product.inventory}
               onChange={handleChange}
             />
           </div>

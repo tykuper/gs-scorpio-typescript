@@ -3,6 +3,9 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 const PORT = process.env.PORT || 8080;
+const defaultURL = process.env.DATABASE_URL
+  ? `https://orca-audio.herokuapp.com`
+  : `http://localhost:${PORT}`;
 require("dotenv").config();
 module.exports = app;
 
@@ -38,8 +41,8 @@ app.post("/create-checkout-session", async (req, res) => {
         };
       }),
       mode: "payment",
-      success_url: `http://localhost:${PORT}/checkout`,
-      cancel_url: `http://localhost:${PORT}/shipping`,
+      success_url: `${defaultURL}/checkout`,
+      cancel_url: `${defaultURL}/shipping`,
     });
 
     res.json({ url: session.url });
