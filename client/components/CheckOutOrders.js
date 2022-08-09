@@ -55,7 +55,7 @@ const CheckOutOrders = (props) => {
         </ListGroup>
         <Link
           style={{ textDecoration: "none" }}
-          to="#"
+          to="/cart"
           className="d-flex justify-content-center"
         >
           <Button variant="secondary" type="button" className="mt-3">
