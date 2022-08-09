@@ -13,6 +13,8 @@ import { connect } from "react-redux";
 import history from "../history.js";
 import FiveStarReviews from "./FiveStarReviews";
 
+//
+
 const SingleProduct = (props) => {
   const {
     name,
