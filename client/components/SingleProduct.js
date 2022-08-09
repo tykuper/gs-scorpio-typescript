@@ -62,8 +62,14 @@ const SingleProduct = (props) => {
                   noise-cancelling
                 </span>
               )}{" "}
-              {inventory <= 10 && (
-                <span className="badge badge-pill bg-danger">low stock</span>
+              {inventory === 0 && (
+                <span className="badge badge-pill bg-danger">out of stock</span>
+              )}{" "}
+              {inventory < 60 && inventory > 0 && (
+                <span className="badge badge-pill bg-warning">low stock</span>
+              )}{" "}
+              {numReviews > 150 && ratings > 4.0 && (
+                <span className="badge badge-pill bg-success">best seller</span>
               )}
             </div>
           </ListGroup.Item>
