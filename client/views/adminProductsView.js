@@ -4,7 +4,7 @@ import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { fetchProductsThunk } from "../store/products";
-import ProductCard from "../components/productCard";
+import ProductCard from "../components/ProductCard";
 import { addToCart } from "../store/cart";
 import history from "../history.js";
 
