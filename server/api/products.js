@@ -2,6 +2,7 @@ const router = require("express").Router();
 const {
   models: { Product, User },
 } = require("../db");
+const { Op } = require("sequelize");
 module.exports = router;
 
 router.get("/", async (req, res, next) => {
@@ -32,6 +33,7 @@ router.get("/category/:category", async (req, res, next) => {
     if (category === "in-ear") {
       const products = await Product.findAll({
         where: { category: "in-ear" },
+        limit: 5,
         attributes: [
           "id",
           "name",
@@ -49,6 +51,7 @@ router.get("/category/:category", async (req, res, next) => {
     } else if (category === "over-ear") {
       const products = await Product.findAll({
         where: { category: "over-ear" },
+        limit: 5,
         attributes: [
           "id",
           "name",
@@ -66,6 +69,43 @@ router.get("/category/:category", async (req, res, next) => {
     } else if (category === "noise-cancelling") {
       const products = await Product.findAll({
         where: { noiseCancelling: true },
+        limit: 5,
+        attributes: [
+          "id",
+          "name",
+          "imageURL",
+          "longDescription",
+          "price",
+          "category",
+          "noiseCancelling",
+          "numReviews",
+          "ratings",
+          "inventory",
+        ],
+      });
+      res.json(products);
+    } else if (category === "best-seller") {
+      const products = await Product.findAll({
+        where: { numReviews: { [Op.gte]: 150 }, ratings: { [Op.gte]: 4.0 } },
+        limit: 5,
+        attributes: [
+          "id",
+          "name",
+          "imageURL",
+          "longDescription",
+          "price",
+          "category",
+          "noiseCancelling",
+          "numReviews",
+          "ratings",
+          "inventory",
+        ],
+      });
+      res.json(products);
+    } else if (category === "low-stock") {
+      const products = await Product.findAll({
+        where: { inventory: { [Op.between]: [1, 60] } },
+        limit: 5,
         attributes: [
           "id",
           "name",

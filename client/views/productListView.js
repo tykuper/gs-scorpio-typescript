@@ -25,9 +25,10 @@ const ProductListView = (props) => {
 
   const radios = [
     { name: "All-Products", value: "1" },
-    { name: "In-Ear", value: "2" },
-    { name: "Over-Ear", value: "3" },
-    { name: "Noise-Cancelling", value: "4" },
+    { name: "Best-Sellers", value: "2" },
+    { name: "In-Ear", value: "3" },
+    { name: "Over-Ear", value: "4" },
+    { name: "Noise-Cancelling", value: "5" },
   ];
 
   useEffect(() => {
@@ -142,9 +143,11 @@ const ProductListView = (props) => {
         {props.products
           ?.filter((product) => {
             if (radioValue === "1") return true;
-            else if (radioValue === "2") return product.category === "in-ear";
-            else if (radioValue === "3") return product.category === "over-ear";
-            else if (radioValue === "4")
+            else if (radioValue === "2")
+              return product.numReviews >= 150 && product.ratings >= 4.0;
+            else if (radioValue === "3") return product.category === "in-ear";
+            else if (radioValue === "4") return product.category === "over-ear";
+            else if (radioValue === "5")
               return product.noiseCancelling === true;
           })
           .map((product) => {
