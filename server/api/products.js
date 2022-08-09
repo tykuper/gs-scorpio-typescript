@@ -26,6 +26,68 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/category/:category", async (req, res, next) => {
+  try {
+    const category = req.params.category;
+    if (category === "in-ear") {
+      const products = await Product.findAll({
+        where: { category: "in-ear" },
+        attributes: [
+          "id",
+          "name",
+          "imageURL",
+          "longDescription",
+          "price",
+          "category",
+          "noiseCancelling",
+          "numReviews",
+          "ratings",
+          "inventory",
+        ],
+      });
+      res.json(products);
+    } else if (category === "over-ear") {
+      const products = await Product.findAll({
+        where: { category: "over-ear" },
+        attributes: [
+          "id",
+          "name",
+          "imageURL",
+          "longDescription",
+          "price",
+          "category",
+          "noiseCancelling",
+          "numReviews",
+          "ratings",
+          "inventory",
+        ],
+      });
+      res.json(products);
+    } else if (category === "noise-cancelling") {
+      const products = await Product.findAll({
+        where: { noiseCancelling: true },
+        attributes: [
+          "id",
+          "name",
+          "imageURL",
+          "longDescription",
+          "price",
+          "category",
+          "noiseCancelling",
+          "numReviews",
+          "ratings",
+          "inventory",
+        ],
+      });
+      res.json(products);
+    } else {
+      res.status(404).send("Not Found");
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/:productId", async (req, res, next) => {
   try {
     const productId = req.params.productId;
