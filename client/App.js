@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <div id="routes">
+      <div className="bg-medium" id="routes">
         <Routes />
       </div>
       <Footer />

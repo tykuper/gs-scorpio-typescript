@@ -20,15 +20,6 @@ class EditProductForm extends React.Component {
     this.props.clearProduct();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.product.id !== this.props.product.id) {
-      this.setState({
-        name: this.props.product.name,
-        price: this.props.product.price,
-      });
-    }
-  }
-
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
