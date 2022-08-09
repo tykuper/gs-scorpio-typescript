@@ -16,7 +16,7 @@ export const Home = (props) => {
       if (
         loggedInUser.id &&
         (!localStorage.getItem("cartItems") ||
-          JSON.parse(localStorage.getItem("cartItems"))?.length)
+          !JSON.parse(localStorage.getItem("cartItems"))?.length)
       ) {
         const res = await axios.get(`api/orders/user/${loggedInUser.id}`);
 

@@ -60,7 +60,7 @@ const SingleProduct = (props) => {
     </Row>
   ) : (
     <div>
-      <h1 className="section-title">Student does not exist!</h1>
+      <h1 className="section-title">Product does not exist!</h1>
     </div>
   );
 };
