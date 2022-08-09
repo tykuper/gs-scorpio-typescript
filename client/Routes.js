@@ -49,11 +49,8 @@ class Routes extends Component {
           <Route path="/orders" component={orderHistoryView} />
           <Route path="/shipping" component={ShippingView} />
           <Route path="/cart" component={CartView} />
-
           <Route path="/payments" component={paymentView} />
-
           <Route exact path="/" component={Home} />
-          <Route component={NotFound} />
           {isAdmin ? (
             <Switch>
               <Route path="/manage/products/add" component={AddProductForm} />
@@ -68,7 +65,16 @@ class Routes extends Component {
               <Route component={NotFound} />
             </Switch>
           ) : (
-            <NotAuthorized />
+            <Switch>
+              <Route path="/manage/products/add" component={NotAuthorized} />
+              <Route
+                path="/manage/products/:productId(\d+)/edit"
+                component={NotAuthorized}
+              />
+              <Route path="/manage/products" component={NotAuthorized} />
+              <Route path="/manage/users" component={NotAuthorized} />
+              <Route component={NotFound} />
+            </Switch>
           )}
         </Switch>
       </div>

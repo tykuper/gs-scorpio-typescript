@@ -35,7 +35,11 @@ const ProductCard = (props) => {
     <Col>
       <Card>
         <Link to={`/products/${id}`}>
-          <Card.Img variant="top h-75" src={imageURL} className="h-25" />
+          <Card.Img
+            variant="top h-75"
+            src={imageURL}
+            className="h-25 img-fluid card-image"
+          />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
             <Card.Text>${price}</Card.Text>
