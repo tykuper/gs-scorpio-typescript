@@ -6,9 +6,11 @@ import history from "../history";
 import { resetCart } from "../store/cart";
 
 const CheckOutSummary = (props) => {
-  const { cartItems, loggedInUser, shipping } = props;
+  const { cartItems, loggedInUser, shipping, orderId } = props;
 
-  const orderId = cartItems[0]?.orderId;
+  console.log(cartItems);
+
+  // const orderId = cartItems[0]?.orderId;
 
   const itemsTotalCount = +cartItems.reduce(
     (acc, curr) => acc + curr.quantity,
