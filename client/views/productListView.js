@@ -12,6 +12,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { fetchProductsThunk } from '../store/products';
 import ProductCard from '../components/ProductCard';
+import { ProductPagination } from '../components/Pagination';
 import { addToCart, setCart } from '../store/cart';
 import history from '../history.js';
 import axios from 'axios';
@@ -111,6 +112,16 @@ const ProductListView = (props) => {
     props.addToCart(addedProduct);
   };
 
+  // pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(6);
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+  //change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="text-center container py-5">
       <h3>
@@ -144,6 +155,7 @@ const ProductListView = (props) => {
             else if (radioValue === '2') return product.category === 'in-ear';
             else if (radioValue === '3') return product.category === 'over-ear';
           })
+          .slice(indexOfFirstProduct, indexOfLastProduct)
           .map((product) => {
             return (
               <ProductCard
@@ -155,6 +167,14 @@ const ProductListView = (props) => {
             );
           })}
       </Row>
+      <br />
+      <br />
+      <ProductPagination
+        productsPerPage={productsPerPage}
+        totalProducts={props.products.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
