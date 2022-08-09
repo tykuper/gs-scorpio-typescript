@@ -125,7 +125,6 @@ const CheckOutSummary = (props) => {
               <Button
                 type="button"
                 onClick={() => placeOrderHandler(orderId, cartItems)}
-                disabled={!orderId}
               >
                 Place Order
               </Button>
