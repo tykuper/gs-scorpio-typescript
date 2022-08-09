@@ -22,7 +22,6 @@ import NotFound from "./components/NotFound";
 import NotAuthorized from "./components/NotAuthorized";
 
 import "@stripe/stripe-js";
-import paymentView from "./views/paymentView";
 
 /**
  * COMPONENT
@@ -49,7 +48,6 @@ class Routes extends Component {
           <Route path="/orders" component={orderHistoryView} />
           <Route path="/shipping" component={ShippingView} />
           <Route path="/cart" component={CartView} />
-          <Route path="/payments" component={paymentView} />
           <Route exact path="/" component={Home} />
           {isAdmin ? (
             <Switch>

@@ -14,7 +14,7 @@ const FAKE_CHECKOUT_DATA = {
   lastName: "Doe",
   email: "john.doe@gmail.com",
   paymentMethod: "VISA",
-  cardNumber: "***************1132",
+  cardNumber: "*************4242",
   expDate: "02/25",
   products: [
     {

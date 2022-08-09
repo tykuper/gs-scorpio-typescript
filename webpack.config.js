@@ -1,3 +1,7 @@
+const dotenv = require("dotenv").config({ path: __dirname + "/.env" });
+const isDevelopment = process.env.NODE_ENV !== "production";
+const webpack = require("webpack");
+
 module.exports = {
   entry: ["./client/index.js"],
   output: {
@@ -15,29 +19,6 @@ module.exports = {
           presets: ["@babel/preset-react"],
         },
       },
-      // {
-      //   test: /\.(scss)$/,
-      //   use: [
-      //     {
-      //       loader: "style-loader", // inject CSS to page
-      //     },
-      //     {
-      //       loader: "css-loader", // translates CSS into CommonJS modules
-      //     },
-      //     {
-      //       loader: "postcss-loader", // Run post css actions
-      //       options: {
-      //         plugins: function () {
-      //           // post css plugins, can be exported to postcss.config.js
-      //           return [require("precss"), require("autoprefixer")];
-      //         },
-      //       },
-      //     },
-      //     {
-      //       loader: "sass-loader", // compiles Sass to CSS
-      //     },
-      //   ],
-      // },
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
@@ -48,4 +29,13 @@ module.exports = {
       },
     ],
   },
+
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env": JSON.stringify(dotenv.parsed),
+      "process.env.NODE_ENV": JSON.stringify(
+        isDevelopment ? "development" : "production"
+      ),
+    }),
+  ].filter(Boolean),
 };
