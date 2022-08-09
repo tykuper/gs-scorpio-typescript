@@ -52,7 +52,7 @@ const CheckOutShipping = (props) => {
         <Link
           style={{ textDecoration: "none" }}
           to="/shipping"
-          className="d-flex justify-content-center"
+          // className="d-flex justify-content-center"
         >
           <Button variant="secondary" type="button" className="mt-3">
             <strong>Edit</strong>
