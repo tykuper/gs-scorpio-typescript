@@ -35,11 +35,10 @@ const ProductCard = (props) => {
     <Col>
       <Card>
         <Link to={`/products/${id}`}>
-          <Card.Img variant="top h-75" src={imageURL} />
+          <Card.Img variant="top h-75" src={imageURL} className="h-25" />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
             <Card.Text>${price}</Card.Text>
-            {/* <Card.Text>{shortDescription}</Card.Text> */}
           </Card.Body>
         </Link>
         <Card.Footer>

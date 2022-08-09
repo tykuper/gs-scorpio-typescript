@@ -73,9 +73,7 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: "QuietComfort Earbuds",
-      imageURL:
-        "https://assets.bose.com/content/dam/cloudassets/Bose_DAM/Web/consumer_electronics/global/products/headphones/qc_earbuds/silo_images/v2/QCEB_PDP_Ecom-Gallery-B03.png/jcr:content/renditions/cq5dam.web.320.320.png",
-      shortDescription: "quiet and comfortable earbuds",
+      imageURL: "/images/QuietComfort_45_headphones.png",
       longDescription:
         "Better sound begins with better silence. That’s why we engineered QuietComfort® Earbuds with the world’s most effective noise cancelling and high-fidelity audio, plus StayHear™ Max tips for extra comfort.",
       price: 199.0,
@@ -86,9 +84,7 @@ async function seed() {
     }),
     Product.create({
       name: "SoundSport wireless headphones",
-      imageURL:
-        "https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/headphones/ssw/product_silo_images/ssw_black_EC_01.psd/jcr:content/renditions/cq5dam.web.600.600.png",
-      shortDescription: "the best headphone for sports",
+      imageURL: "/images/QuietComfort_Earbuds.jpeg",
       longDescription:
         "Exercise is a demanding activity. And you demand wireless earbuds that are up to the challenge. SoundSport wireless headphones – Refurbished keep you moving with powerful audio and earbuds that stay secure and comfortable.",
       price: 149.0,
@@ -99,9 +95,7 @@ async function seed() {
     }),
     Product.create({
       name: "QuietComfort 45 headphones",
-      imageURL:
-        "https://assets.bose.com/content/dam/cloudassets/Bose_DAM/Web/consumer_electronics/global/products/headphones/qc45/product_silo_images/QC45_PDP_Ecom-Gallery-W02.png/jcr:content/renditions/cq5dam.web.600.600.png",
-      shortDescription: "proprietary acoustic technology for deep, clear audio",
+      imageURL: "/images/SoundSport_wireless_headphones.png",
       longDescription:
         "You feel it the minute you put them on. The soft, plush cushions seal you in. Then you flip the switch and whoosh — the world fades. The music starts, and it’s love at first listen.",
       price: 279.0,
@@ -112,13 +106,156 @@ async function seed() {
     }),
     Product.create({
       name: "Sport Earbuds",
-      imageURL:
-        "https://assets.bose.com/content/dam/Bose_DAM/Web/consumer_electronics/global/products/headphones/earbuds_500/product_silo_images/seb_product_slideshow_black_ec_03_web.jpg/jcr:content/renditions/cq5dam.web.600.600.jpeg",
-      shortDescription:
-        "Earbuds’ sleek design allows them to sit close to your ears",
+      imageURL: "/images/Sport_Earbuds.png",
       longDescription:
         "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
       price: 124.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "Anker Soundcore Life P3",
+      imageURL: "/images/Anker_Soundcore_Life_P3.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 156.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "Apple AirPods Pro",
+      imageURL: "/images/Apple_AirPods_Pro.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 124.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "Crusher Evo Sensory Bass Headphones with Personal Sound",
+      imageURL:
+        "/images/Crusher_Evo_Sensory_Bass_Headphones_with_Personal_Sound.jpeg",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 66.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "IER M7 Hi Res Studio Monitor In ear Headphones",
+      imageURL: "/images/IER_M7_Hi_Res_Studio_Monitor_In_ear_Headphones.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 34.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "IER-Z1R Signature Series Premium Hi-Res In-ear Headphones",
+      imageURL:
+        "/images/IER_Z1R_Signature_Series_Premium_Hi_Res_In_ear Headphones.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 56.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "LinkBuds S Truly Wireless Noise Canceling Earbuds",
+      imageURL: "/images/LinkBuds_S_Truly_Wireless_Noise_Canceling_Earbuds.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 55.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "LinkBuds Truly Wireless Earbuds",
+      imageURL: "/images/LinkBuds_Truly_Wireless_Earbuds.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 124.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "MDR-EX15LP Wired In-ear Headphones",
+      imageURL: "/images/MDR_EX15LP_Wired_In_ear_Headphones.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 343.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "MDR-Z7M2 Premium Hi-Res Headphones",
+      imageURL: "/images/MDR_Z7M2_Pr_Hi_Res_Headphones.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 100.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "momentum true wireless",
+      imageURL: "/images/momentum_true_wireless.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 220.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "Push Active True Wirelss Earbuds",
+      imageURL: "/images/Push_Active_True_Wirelss_Earbuds.jpeg",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 340.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "Tribit FlyBuds 3",
+      imageURL: "/images/Tribit_FlyBuds_3.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 200.0,
+      category: "in-ear",
+      noiseCancelling: false,
+      numReviews: 233,
+      ratings: 4.5,
+    }),
+    Product.create({
+      name: "WF-1000XM4 Industry Leading Noise Canceling Truly Wireless Earbuds",
+      imageURL:
+        "/images/WF_1000XM4_Industry_Leading_Noise_Canceling_ Truly_Wireless_Earbuds.png",
+      longDescription:
+        "Bose Sport Earbuds are designed from the ground up to energize your exercise with acclaimed lifelike sound and a comfortable, secure fit.",
+      price: 830.0,
       category: "in-ear",
       noiseCancelling: false,
       numReviews: 233,

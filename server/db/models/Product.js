@@ -12,10 +12,6 @@ const Product = db.define("product", {
     defaultValue:
       "https://media.istockphoto.com/vectors/headset-icon-music-templates-vector-id1187826963?k=20&m=1187826963&s=612x612&w=0&h=RwruPmaxyRiNzwxHtllG_Omzwa8ky07EOqR95ZRwWbU=",
   },
-  shortDescription: {
-    type: Sequelize.STRING,
-    defaultValue: "TBD",
-  },
   longDescription: {
     type: Sequelize.STRING,
     defaultValue: "TBD",
@@ -40,6 +36,10 @@ const Product = db.define("product", {
   ratings: {
     type: Sequelize.DECIMAL(3, 1),
     defaultValue: 0,
+  },
+  inventory: {
+    type: Sequelize.STRING,
+    defaultValue: 80,
   },
 });
 
