@@ -1,5 +1,12 @@
 import React from "react";
-import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  ListGroup,
+  Card,
+  Button,
+  ListGroupItem,
+} from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
@@ -7,8 +14,16 @@ import history from "../history.js";
 import FiveStarReviews from "./FiveStarReviews";
 
 const SingleProduct = (props) => {
-  const { name, imageURL, longDescription, price, numReviews, ratings } =
-    props.product || {};
+  const {
+    name,
+    imageURL,
+    longDescription,
+    price,
+    numReviews,
+    ratings,
+    category,
+    noiseCancelling,
+  } = props.product || {};
 
   const addToCartHandler = async () => {
     const addedProduct = props.product;
@@ -35,9 +50,19 @@ const SingleProduct = (props) => {
           <ListGroup.Item className="border-0">
             <FiveStarReviews numReviews={numReviews} ratings={ratings} />
           </ListGroup.Item>
-          <ListGroup.Item className="fs-3">${price}</ListGroup.Item>
+          <ListGroup.Item className="fs-3">
+            ${price}
+            <div>
+              <span className="badge badge-pill bg-info">{category}</span>{" "}
+              {noiseCancelling && (
+                <span className="badge badge-pill bg-info">
+                  noise-cancelling
+                </span>
+              )}
+            </div>
+          </ListGroup.Item>
           <ListGroup.Item className="border-0">
-            <p>{longDescription}</p>
+            <p className="fs-4">{longDescription}</p>
           </ListGroup.Item>
           <ListGroup.Item>
             <div>

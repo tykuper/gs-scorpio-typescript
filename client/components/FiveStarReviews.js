@@ -12,11 +12,10 @@ function FiveStarReviews(props) {
         <SingleStarReview half={2.5} full={3} ratings={ratings} />
         <SingleStarReview half={3.5} full={4} ratings={ratings} />
         <SingleStarReview half={4.5} full={5} ratings={ratings} />
+        <span className="fs-4">{ratings}</span>
+        <span className="fs-4"> ({numReviews} Reviews)</span>
       </div>
-      <div>
-        <span>{ratings}</span>
-        <span> ({numReviews} Reviews)</span>
-      </div>
+      <div></div>
     </div>
   );
 }
