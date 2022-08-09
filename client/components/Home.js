@@ -11,12 +11,19 @@ export const Home = (props) => {
   const loggedInUser = props.loggedInUser;
   const cartItems = props.cart;
 
+  // if (
+  //   loggedInUser.id &&
+  //   (!localStorage.getItem("cartItems") ||
+  //     !JSON.parse(localStorage.getItem("cartItems"))?.length)
+  // ) {
+
   useEffect(() => {
     const fetchData = async () => {
       if (
         loggedInUser.id &&
         (!localStorage.getItem("cartItems") ||
-          !JSON.parse(localStorage.getItem("cartItems"))?.length)
+          !JSON.parse(localStorage.getItem("cartItems"))?.length ||
+          JSON.parse(localStorage.getItem("cartItems"))?.length)
       ) {
         const res = await axios.get(`api/orders/user/${loggedInUser.id}`);
 
