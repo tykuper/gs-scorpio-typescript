@@ -1,16 +1,16 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { logout } from '../../store';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import GuestNavbar from './GuestNavbar';
-import UserNavbar from './UserNavbar';
-import AdminToolbar from './AdminToolbar';
-import { FaShoppingCart } from 'react-icons/fa';
-import { Badge } from 'react-bootstrap';
+import React from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { logout } from "../../store";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import GuestNavbar from "./GuestNavbar";
+import UserNavbar from "./UserNavbar";
+import AdminToolbar from "./AdminToolbar";
+import { FaShoppingCart } from "react-icons/fa";
+import { Badge } from "react-bootstrap";
 
 const MainNavbar = ({ handleClick, isLoggedIn, isAdmin, cart }) => {
   const cartCount = cart.reduce((acc, curr) => acc + curr.quantity, 0);

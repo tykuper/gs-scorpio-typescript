@@ -1,11 +1,11 @@
-import React from 'react';
-import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap';
-import styles from './SingleProduct.module.css';
-import { Helmet } from 'react-helmet-async';
-import { addToCart } from '../store/cart';
-import { connect } from 'react-redux';
-import history from '../history.js';
-import FiveStarReviews from './FiveStarReviews';
+import React from "react";
+import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
+import styles from "./SingleProduct.module.css";
+import { Helmet } from "react-helmet-async";
+import { addToCart } from "../store/cart";
+import { connect } from "react-redux";
+import history from "../history.js";
+import FiveStarReviews from "./FiveStarReviews";
 
 const SingleProduct = (props) => {
   const {
@@ -25,10 +25,10 @@ const SingleProduct = (props) => {
 
     props.addToCart(addedProduct);
 
-    history.push('/cart');
+    history.push("/cart");
   };
 
-  return (
+  return props.product ? (
     <Row className="m-3 justify-content-around">
       <Col md={6} className="d-flex justify-content-center align-items-center">
         <img src={imageURL} alt={name} className="img-singleProduct"></img>
@@ -59,6 +59,10 @@ const SingleProduct = (props) => {
         </ListGroup>
       </Col>
     </Row>
+  ) : (
+    <div>
+      <h1 className="section-title">Student does not exist!</h1>
+    </div>
   );
 };
 

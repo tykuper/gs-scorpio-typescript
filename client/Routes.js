@@ -18,6 +18,7 @@ import AdminUsersView from "./views/adminUsersView";
 import orderHistoryView from "./views/orderHistoryView";
 import optionalSignInView from "./views/optionalSignInView";
 import ShippingView from "./views/shippingView";
+import NotFound from "./components/NotFound";
 
 /**
  * COMPONENT
@@ -32,18 +33,6 @@ class Routes extends Component {
 
     return (
       <div>
-        {/* {isLoggedIn ? (
-          <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path='/' exact component={ Login } />
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-          </Switch>
-        )} */}
         <Switch>
           <Route path="/home" component={Home} />
           <Route path="/products/:productId" component={SingleProductView} />
@@ -55,15 +44,20 @@ class Routes extends Component {
           <Route path="/signup" component={SignUpView} />
           <Route path="/orders" component={orderHistoryView} />
           <Route path="/shipping" component={ShippingView} />
-          <Route path="/manage/products/add" component={AddProductForm} />
-          <Route
-            path="/manage/products/:productId(\d+)/edit"
-            component={EditProductForm}
-          />
-          <Route path="/manage/products" component={AdminProductsView} />
-          <Route path="/manage/users" component={AdminUsersView} />
+          {isAdmin ? (
+            <Fragment>
+              <Route path="/manage/products/add" component={AddProductForm} />
+              <Route
+                path="/manage/products/:productId(\d+)/edit"
+                component={EditProductForm}
+              />
+              <Route path="/manage/products" component={AdminProductsView} />
+              <Route path="/manage/users" component={AdminUsersView} />
+            </Fragment>
+          ) : null}
           <Route path="/cart" component={CartView} />
-          <Redirect to="/home" />
+          <Route exact path="/" component={Home} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     );
