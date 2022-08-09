@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const FETCH_USERS = "SET_USERS";
+const FETCH_USERS = 'SET_USERS';
 
 const fetchUsers = (users) => {
   return {
@@ -12,9 +12,9 @@ const fetchUsers = (users) => {
 export const fetchUsersThunk = () => {
   return async (dispatch) => {
     try {
-      const token = window.localStorage.getItem("token");
+      const token = window.localStorage.getItem('token');
       if (token) {
-        const { data: users } = await axios.get("/api/users", {
+        const { data: users } = await axios.get('/api/users', {
           headers: { authorization: token },
         });
         dispatch(fetchUsers(users));

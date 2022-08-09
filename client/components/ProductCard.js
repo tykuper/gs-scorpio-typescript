@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
-import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
-import { useHistory, Link } from "react-router-dom";
-import { addToCart } from "../store/cart";
-import { useDispatch } from "react-redux";
-import { connect } from "react-redux";
-import { deleteProductThunk } from "../store/products";
+import React, { Fragment } from 'react';
+import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap';
+import { useHistory, Link } from 'react-router-dom';
+import { addToCart } from '../store/cart';
+import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { deleteProductThunk } from '../store/products';
 
 const ProductCard = (props) => {
   const { id, name, imageURL, price, category, noiseCancelling, inventory } =
@@ -18,7 +18,7 @@ const ProductCard = (props) => {
   };
 
   const deleteProduct = (id) => {
-    if (confirm("Are you sure you want to delete this product?")) {
+    if (confirm('Are you sure you want to delete this product?')) {
       props.deleteProduct(id);
     }
   };
@@ -28,9 +28,8 @@ const ProductCard = (props) => {
       <Card>
         <Link to={`/products/${id}`}>
           <Card.Img
-            variant="top h-75"
             src={imageURL}
-            className="h-25 img-fluid card-image"
+            style={{ objectFit: 'contain', height: '300px', width: '300px' }}
           />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
@@ -42,7 +41,7 @@ const ProductCard = (props) => {
           </Card.Body>
         </Link>
         <Card.Footer>
-          {history.location.pathname !== "/manage/products" && (
+          {history.location.pathname !== '/manage/products' && (
             <Button
               variant="primary"
               onClick={() => props.onClick(props.product)}
@@ -50,7 +49,7 @@ const ProductCard = (props) => {
               Add to Cart
             </Button>
           )}
-          {props.isAdmin && history.location.pathname === "/manage/products" && (
+          {props.isAdmin && history.location.pathname === '/manage/products' && (
             <Fragment>
               <Button variant="warning" onClick={editProduct}>
                 Edit Product
