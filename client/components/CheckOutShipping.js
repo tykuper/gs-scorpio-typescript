@@ -26,7 +26,7 @@ const CheckOutShipping = (props) => {
           <Row>
             <Col>
               <strong>Name: </strong>
-              {shipping.user.firstName + " " + shipping.user.lastName}
+              {shipping.user?.firstName + " " + shipping.user?.lastName}
             </Col>
           </Row>
         </ListGroup.Item>
