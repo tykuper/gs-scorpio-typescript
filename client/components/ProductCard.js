@@ -7,16 +7,8 @@ import { connect } from 'react-redux';
 import { deleteProductThunk } from '../store/products';
 
 const ProductCard = (props) => {
-  const {
-    id,
-    name,
-    imageURL,
-    shortDescription,
-    longDescription,
-    price,
-    category,
-    noiseCancelling,
-  } = props.product;
+  const { id, name, imageURL, price, category, noiseCancelling, inventory } =
+    props.product;
 
   const history = useHistory();
 
@@ -42,6 +34,10 @@ const ProductCard = (props) => {
           <Card.Body>
             <Card.Title>{name}</Card.Title>
             <Card.Text>${price}</Card.Text>
+            {props.isAdmin &&
+              history.location.pathname === "/manage/products" && (
+                <Card.Text>Inventory: {inventory}</Card.Text>
+              )}
           </Card.Body>
         </Link>
         <Card.Footer>
