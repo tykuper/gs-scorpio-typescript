@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import PaymentsButton from "./PaymentsButton";
 
 const CheckOutPayment = (props) => {
   const checkOutData = props.checkOutData;
@@ -37,7 +38,7 @@ const CheckOutPayment = (props) => {
           </Row>
         </ListGroup.Item>
 
-        <Link
+        {/* <Link
           style={{ textDecoration: "none" }}
           to="#"
           className="d-flex justify-content-center"
@@ -45,7 +46,9 @@ const CheckOutPayment = (props) => {
           <Button variant="secondary" type="button" className="mt-3">
             <strong>Edit</strong>
           </Button>
-        </Link>
+        </Link> */}
+
+        <PaymentsButton btnName="Edit" />
       </Card.Body>
     </Card>
   );
