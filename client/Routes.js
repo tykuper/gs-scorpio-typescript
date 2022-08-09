@@ -44,8 +44,8 @@ class Routes extends Component {
           <Route path="/signup" component={SignUpView} />
           <Route path="/orders" component={orderHistoryView} />
           <Route path="/shipping" component={ShippingView} />
-          {isAdmin ? (
-            <Fragment>
+          {isAdmin && (
+            <Switch>
               <Route path="/manage/products/add" component={AddProductForm} />
               <Route
                 path="/manage/products/:productId(\d+)/edit"
@@ -53,8 +53,11 @@ class Routes extends Component {
               />
               <Route path="/manage/products" component={AdminProductsView} />
               <Route path="/manage/users" component={AdminUsersView} />
-            </Fragment>
-          ) : null}
+              <Route path="/cart" component={CartView} />
+              <Route exact path="/" component={Home} />
+              <Route component={NotFound} />
+            </Switch>
+          )}
           <Route path="/cart" component={CartView} />
           <Route exact path="/" component={Home} />
           <Route component={NotFound} />

@@ -7,17 +7,8 @@ import history from "../history.js";
 import FiveStarReviews from "./FiveStarReviews";
 
 const SingleProduct = (props) => {
-  const {
-    name,
-    imageURL,
-    shortDescription,
-    longDescription,
-    price,
-    category,
-    noiseCancelling,
-    numReviews,
-    ratings,
-  } = props.product;
+  const { name, imageURL, longDescription, price, numReviews, ratings } =
+    props.product || {};
 
   const addToCartHandler = async () => {
     const addedProduct = props.product;
