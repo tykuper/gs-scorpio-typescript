@@ -67,3 +67,7 @@ form div {
 .address-input-shipping {
   width: 70%;
 }
+
+.card-image {
+  object-fit: contain;
+}

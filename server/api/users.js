@@ -32,3 +32,18 @@ router.post("/create", async (req, res, next) => {
     next(err);
   }
 });
+
+router.put("/:userId/edit", async (req, res, next) => {
+  try {
+    const user = await User.findByToken(req.body.token);
+    if (user.id === Number(req.params.userId)) {
+      res.send(await user.update(req.body));
+    } else {
+      const error = Error("Can only edit your own account information");
+      error.status = 401;
+      throw error;
+    }
+  } catch (error) {
+    next(error);
+  }
+});
