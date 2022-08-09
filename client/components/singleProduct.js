@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
-import styles from "./SingleProduct.module.css";
 import { Helmet } from "react-helmet-async";
 import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
