@@ -6,10 +6,6 @@ import { connect } from "react-redux";
 class EditProductForm extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   name: this.props.product.id ? this.props.product.name : "",
-    //   price: this.props.product.id ? this.props.product.price : 0,
-    // };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,7 +43,7 @@ class EditProductForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
 
-    return (
+    return this.props.product ? (
       <div>
         <div className="m-2">
           <h1>Edit a Product</h1>
@@ -158,6 +154,10 @@ class EditProductForm extends React.Component {
             </button>
           </div>
         </form>
+      </div>
+    ) : (
+      <div>
+        <h1 className="section-title">Product does not exist!</h1>
       </div>
     );
   }

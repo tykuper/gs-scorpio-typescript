@@ -19,6 +19,7 @@ import orderHistoryView from "./views/orderHistoryView";
 import optionalSignInView from "./views/optionalSignInView";
 import ShippingView from "./views/shippingView";
 import NotFound from "./components/NotFound";
+import NotAuthorized from "./components/NotAuthorized";
 
 /**
  * COMPONENT
@@ -44,7 +45,7 @@ class Routes extends Component {
           <Route path="/signup" component={SignUpView} />
           <Route path="/orders" component={orderHistoryView} />
           <Route path="/shipping" component={ShippingView} />
-          {isAdmin && (
+          {isAdmin ? (
             <Switch>
               <Route path="/manage/products/add" component={AddProductForm} />
               <Route
@@ -57,6 +58,8 @@ class Routes extends Component {
               <Route exact path="/" component={Home} />
               <Route component={NotFound} />
             </Switch>
+          ) : (
+            <NotAuthorized />
           )}
           <Route path="/cart" component={CartView} />
           <Route exact path="/" component={Home} />
