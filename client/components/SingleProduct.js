@@ -25,6 +25,7 @@ const SingleProduct = (props) => {
     ratings,
     category,
     noiseCancelling,
+    inventory,
   } = props.product || {};
 
   const addToCartHandler = async () => {
@@ -60,6 +61,9 @@ const SingleProduct = (props) => {
                 <span className="badge badge-pill bg-info">
                   noise-cancelling
                 </span>
+              )}{" "}
+              {inventory <= 10 && (
+                <span className="badge badge-pill bg-danger">low stock</span>
               )}
             </div>
           </ListGroup.Item>

@@ -15,6 +15,9 @@ router.get("/", async (req, res, next) => {
         "price",
         "category",
         "noiseCancelling",
+        "numReviews",
+        "ratings",
+        "inventory",
       ],
     });
     res.json(products);
@@ -37,6 +40,7 @@ router.get("/:productId", async (req, res, next) => {
         "noiseCancelling",
         "numReviews",
         "ratings",
+        "inventory",
       ],
     });
     res.json(product);
