@@ -1,9 +1,11 @@
-import React from 'react';
-import { updateProductThunk } from '../store/products';
-import { fetchProductThunk, fetchProduct } from '../store/singleProduct';
-import { connect } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import { updateProductThunk } from "../store/products";
+import { fetchProductThunk, fetchProduct } from "../store/singleProduct";
+import { connect } from "react-redux";
+import NotFound from "./NotFound";
+import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class EditProductForm extends React.Component {
   constructor(props) {
@@ -36,7 +38,7 @@ class EditProductForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     console.log(this.props.product);
-    const notifyEdited = () => toast('Product Successfully Edited!');
+    const notifyEdited = () => toast("Product Successfully Edited!");
 
     return this.props.product ? (
       <div>
@@ -135,7 +137,7 @@ class EditProductForm extends React.Component {
           <div className="col-md-4 m-4">
             <label htmlFor="noiseCancelling" className="form-check-label">
               Noise Cancelling
-            </label>{' '}
+            </label>{" "}
             <select
               name="noiseCancelling"
               className="form-control"
@@ -158,8 +160,14 @@ class EditProductForm extends React.Component {
         </form>
       </div>
     ) : (
-      <div>
-        <h1 className="section-title">Product does not exist!</h1>
+      <div className="container text-center">
+        <div className="row">
+          <h1 className="section-title">Product does not exist!</h1>
+          <img src="/images/confused-orca.png" />
+          <Link to={"/manage/products"}>
+            <button className="btn btn-primary btn-lg">Back to Products</button>
+          </Link>
+        </div>
       </div>
     );
   }

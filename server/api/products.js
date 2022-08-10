@@ -105,7 +105,7 @@ router.get("/category/:category", async (req, res, next) => {
     } else if (category === "low-stock") {
       const products = await Product.findAll({
         where: { inventory: { [Op.between]: [1, 60] } },
-        limit: 5,
+        limit: 3,
         attributes: [
           "id",
           "name",
