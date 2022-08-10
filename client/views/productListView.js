@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { Row, Col, ButtonGroup, ToggleButton } from 'react-bootstrap';
-import { fetchProductsThunk } from '../store/products';
-import ProductCard from '../components/ProductCard';
-import { ProductPagination } from '../components/Pagination';
-import { addToCart, setCart } from '../store/cart';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Row, Col, ButtonGroup, ToggleButton } from "react-bootstrap";
+import { fetchProductsThunk } from "../store/products";
+import ProductCard from "../components/ProductCard";
+import { ProductPagination } from "../components/Pagination";
+import { addToCart, setCart } from "../store/cart";
+import axios from "axios";
 
 const ProductListView = (props) => {
   const cartItems = props.cart;
   const loggedInUser = props.loggedInUser;
   const [cartDB, setCartDB] = useState([]);
   const [orderId, setOrderId] = useState(null);
-  const [radioValue, setRadioValue] = useState('1');
+  const [radioValue, setRadioValue] = useState("1");
 
   const radios = [
-    { name: 'All-Products', value: '1' },
-    { name: 'Best-Sellers', value: '2' },
-    { name: 'In-Ear', value: '3' },
-    { name: 'Over-Ear', value: '4' },
-    { name: 'Noise-Cancelling', value: '5' },
+    { name: "All-Products", value: "1" },
+    { name: "Best-Sellers", value: "2" },
+    { name: "In-Ear", value: "3" },
+    { name: "Over-Ear", value: "4" },
+    { name: "Noise-Cancelling", value: "5" },
   ];
 
   const perPage = [
-    { name: '3', value: '3' },
-    { name: '6', value: '6' },
-    { name: '9', value: '9' },
-    { name: '12', value: '12' },
+    { name: "3", value: "3" },
+    { name: "6", value: "6" },
+    { name: "9", value: "9" },
+    { name: "12", value: "12" },
   ];
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const ProductListView = (props) => {
 
         //create new order in Order Table
         const { data: createdOrder } = await axios.post(
-          '/api/orders/create',
+          "/api/orders/create",
           userId
         );
 
@@ -55,7 +55,7 @@ const ProductListView = (props) => {
 
         // create or update orders in orderProduct table
         const { data: updatedOrders } = await axios.put(
-          'api/orders/update',
+          "api/orders/update",
           cart
         );
 
@@ -65,13 +65,13 @@ const ProductListView = (props) => {
       // get the latest cart data from DB
       if (
         loggedInUser.id &&
-        (!localStorage.getItem('cartItems') ||
-          !JSON.parse(localStorage.getItem('cartItems'))?.length)
+        (!localStorage.getItem("cartItems") ||
+          !JSON.parse(localStorage.getItem("cartItems"))?.length)
       ) {
         const res = await axios.get(`api/orders/user/${loggedInUser.id}`);
 
         const inCartOrders = res.data.filter(
-          (item) => item.orderStatus === 'In-Cart'
+          (item) => item.orderStatus === "In-Cart"
         );
 
         let inCartOrdersProducts = inCartOrders[0]?.products.map((product) => {
@@ -86,7 +86,7 @@ const ProductListView = (props) => {
         setCartDB(inCartOrdersProducts);
 
         inCartOrdersProducts = inCartOrdersProducts || [];
-        localStorage.setItem('cartItems', JSON.stringify(inCartOrdersProducts));
+        localStorage.setItem("cartItems", JSON.stringify(inCartOrdersProducts));
       }
     };
 
@@ -100,7 +100,7 @@ const ProductListView = (props) => {
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState('6');
+  const [productsPerPage, setProductsPerPage] = useState("6");
   const [totalProducts, setTotalProducts] = useState([]);
   const [currentTotal, setCurrentTotal] = useState(props.products.length);
 
@@ -120,8 +120,8 @@ const ProductListView = (props) => {
             if (i === 1) return true;
             else if (i === 2)
               return product.numReviews >= 150 && product.ratings >= 4.0;
-            else if (i === 3) return product.category === 'in-ear';
-            else if (i === 4) return product.category === 'over-ear';
+            else if (i === 3) return product.category === "in-ear";
+            else if (i === 4) return product.category === "over-ear";
             else if (i === 5) return product.noiseCancelling === true;
           }).length
         );
@@ -152,8 +152,8 @@ const ProductListView = (props) => {
                 type="radio"
                 variant={
                   radioValue === radio.value
-                    ? 'outline-primary'
-                    : 'outline-primary'
+                    ? "outline-primary"
+                    : "outline-primary"
                 }
                 name="radio"
                 value={radio.value}
@@ -179,8 +179,8 @@ const ProductListView = (props) => {
                     type="radio"
                     variant={
                       productsPerPage === perPage.value
-                        ? 'outline-primary'
-                        : 'outline-primary'
+                        ? "outline-primary"
+                        : "outline-primary"
                     }
                     name="perPage"
                     value={perPage.value}
@@ -200,12 +200,12 @@ const ProductListView = (props) => {
       <Row xs={1} md={2} lg={3} className="g-4">
         {props.products
           ?.filter((product) => {
-            if (radioValue === '1') return true;
-            else if (radioValue === '2')
+            if (radioValue === "1") return true;
+            else if (radioValue === "2")
               return product.numReviews >= 150 && product.ratings >= 4.0;
-            else if (radioValue === '3') return product.category === 'in-ear';
-            else if (radioValue === '4') return product.category === 'over-ear';
-            else if (radioValue === '5')
+            else if (radioValue === "3") return product.category === "in-ear";
+            else if (radioValue === "4") return product.category === "over-ear";
+            else if (radioValue === "5")
               return product.noiseCancelling === true;
           })
           .slice(indexOfFirstProduct, indexOfLastProduct)
@@ -222,12 +222,14 @@ const ProductListView = (props) => {
       </Row>
       <br />
       <br />
-      <ProductPagination
-        productsPerPage={productsPerPage}
-        totalProducts={currentTotal || props.products.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
+      <div data-aos="fade-right" data-aos-duration="1500" data-aos-delay="1000">
+        <ProductPagination
+          productsPerPage={productsPerPage}
+          totalProducts={currentTotal || props.products.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 };

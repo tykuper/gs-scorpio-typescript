@@ -107,6 +107,11 @@ form div {
   padding-bottom: 80px;
 }
 
+.form-bottom {
+  padding-top: 200px;
+  padding-bottom: 200px;
+}
+
 .home-top {
   background-image: url(/images/home_orca.png);
   height: 100vh;

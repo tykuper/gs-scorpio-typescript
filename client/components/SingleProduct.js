@@ -36,55 +36,64 @@ const SingleProduct = (props) => {
   };
 
   return props.product ? (
-    <Row className="m-3 justify-content-around">
-      <Col md={6} className="d-flex justify-content-center align-items-center">
-        <img src={imageURL} alt={name} className="img-singleProduct"></img>
-      </Col>
+    <div data-aos="flip-down" data-aos-duration="1500">
+      <Row className="m-3 justify-content-around">
+        <Col
+          md={6}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <img src={imageURL} alt={name} className="img-singleProduct"></img>
+        </Col>
 
-      <Col md={6}>
-        <ListGroup variant="flush">
-          <ListGroup.Item className="border-0">
-            <Helmet>
-              <title>{name}</title>
-            </Helmet>
-            <h1>{name}</h1>
-          </ListGroup.Item>
-          <ListGroup.Item className="border-0">
-            <FiveStarReviews numReviews={numReviews} ratings={ratings} />
-          </ListGroup.Item>
-          <ListGroup.Item className="fs-3">
-            ${price}
-            <div>
-              <span className="badge badge-pill bg-info">{category}</span>{" "}
-              {noiseCancelling && (
-                <span className="badge badge-pill bg-info">
-                  noise-cancelling
-                </span>
-              )}{" "}
-              {numReviews >= 150 && ratings >= 4.0 && (
-                <span className="badge badge-pill bg-success">best seller</span>
-              )}{" "}
-              {inventory === 0 && (
-                <span className="badge badge-pill bg-danger">out of stock</span>
-              )}{" "}
-              {inventory < 60 && inventory > 0 && (
-                <span className="badge badge-pill bg-warning">low stock</span>
-              )}
-            </div>
-          </ListGroup.Item>
-          <ListGroup.Item className="border-0">
-            <p className="fs-4">{longDescription}</p>
-          </ListGroup.Item>
-          <ListGroup.Item>
-            <div>
-              <Button variant="primary" onClick={addToCartHandler}>
-                Add to Cart
-              </Button>
-            </div>
-          </ListGroup.Item>
-        </ListGroup>
-      </Col>
-    </Row>
+        <Col md={6}>
+          <ListGroup variant="flush">
+            <ListGroup.Item className="border-0">
+              <Helmet>
+                <title>{name}</title>
+              </Helmet>
+              <h1>{name}</h1>
+            </ListGroup.Item>
+            <ListGroup.Item className="border-0">
+              <FiveStarReviews numReviews={numReviews} ratings={ratings} />
+            </ListGroup.Item>
+            <ListGroup.Item className="fs-3">
+              ${price}
+              <div>
+                <span className="badge badge-pill bg-info">{category}</span>{" "}
+                {noiseCancelling && (
+                  <span className="badge badge-pill bg-info">
+                    noise-cancelling
+                  </span>
+                )}{" "}
+                {numReviews >= 150 && ratings >= 4.0 && (
+                  <span className="badge badge-pill bg-success">
+                    best seller
+                  </span>
+                )}{" "}
+                {inventory === 0 && (
+                  <span className="badge badge-pill bg-danger">
+                    out of stock
+                  </span>
+                )}{" "}
+                {inventory < 60 && inventory > 0 && (
+                  <span className="badge badge-pill bg-warning">low stock</span>
+                )}
+              </div>
+            </ListGroup.Item>
+            <ListGroup.Item className="border-0">
+              <p className="fs-4">{longDescription}</p>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <div>
+                <Button variant="primary" onClick={addToCartHandler}>
+                  Add to Cart
+                </Button>
+              </div>
+            </ListGroup.Item>
+          </ListGroup>
+        </Col>
+      </Row>
+    </div>
   ) : (
     <div className="container text-center">
       <div className="row">

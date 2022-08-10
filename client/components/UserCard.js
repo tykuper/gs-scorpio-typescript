@@ -8,17 +8,19 @@ const ProductCard = (props) => {
   console.log(props);
 
   return (
-    <Col>
-      <Card>
-        <Card.Body>
-          <Card.Title>
-            <strong>{firstName + " " + lastName}</strong>
-          </Card.Title>
-          <Card.Text>{email}</Card.Text>
-          <Card.Text>{role}</Card.Text>
-        </Card.Body>
-      </Card>
-    </Col>
+    <div data-aos="slide-up" data-aos-duration="1500">
+      <Col>
+        <Card>
+          <Card.Body>
+            <Card.Title>
+              <strong>{firstName + " " + lastName}</strong>
+            </Card.Title>
+            <Card.Text>{email}</Card.Text>
+            <Card.Text>{role}</Card.Text>
+          </Card.Body>
+        </Card>
+      </Col>
+    </div>
   );
 };
 
