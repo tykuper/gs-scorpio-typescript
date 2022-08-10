@@ -47,3 +47,23 @@ router.put("/:userId/edit", async (req, res, next) => {
     next(error);
   }
 });
+
+router.put("/update", async (req, res, next) => {
+  const userId = req.body.userId;
+
+  try {
+    // await User.destroy({
+    //   where: {
+    //     userId,
+    //   },
+    // });
+
+    console.log(req.body);
+
+    const updatedUser = await User.update(req.body, { where: { id: userId } });
+
+    res.json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
+});

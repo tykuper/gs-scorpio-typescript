@@ -20,7 +20,7 @@ import optionalSignInView from "./views/optionalSignInView";
 import ShippingView from "./views/shippingView";
 import NotFound from "./components/NotFound";
 import NotAuthorized from "./components/NotAuthorized";
-
+import userAccountView from "./views/userAccountView";
 import "@stripe/stripe-js";
 
 /**
@@ -48,6 +48,7 @@ class Routes extends Component {
           <Route path="/orders" component={orderHistoryView} />
           <Route path="/shipping" component={ShippingView} />
           <Route path="/cart" component={CartView} />
+          <Route path="/user-account" component={userAccountView} />
           <Route exact path="/" component={Home} />
           {isAdmin ? (
             <Switch>

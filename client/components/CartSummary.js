@@ -50,7 +50,6 @@ const CartSummary = (props) => {
   };
 
   const removeItemHandler = async (item) => {
-    console.log(loggedInUser.id, item, orderId);
     if (loggedInUser.id && item && orderId) {
       // props.resetCartThunk(item, orderId);
       const res = await axios.delete(
@@ -188,7 +187,6 @@ const CartSummary = (props) => {
                       type="button"
                       disabled={cartItems.length === 0}
                       onClick={() => {
-                        console.log(orderId);
                         includeOrderId(orderId);
                         if (loggedInUser.id) {
                           history.push("/shipping");
