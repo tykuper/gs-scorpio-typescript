@@ -3,6 +3,9 @@ const {
   models: { User, Order },
 } = require("../db");
 module.exports = router;
+const bcrypt = require("bcrypt");
+
+const SALT_ROUNDS = 5;
 
 router.get("/", async (req, res, next) => {
   try {
@@ -58,9 +61,12 @@ router.put("/update", async (req, res, next) => {
     //   },
     // });
 
-    console.log(req.body);
+    const hashedPW = await bcrypt.hash(req.body.password, SALT_ROUNDS);
 
-    const updatedUser = await User.update(req.body, { where: { id: userId } });
+    const updatedUser = await User.update(
+      { ...req.body, password: hashedPW },
+      { where: { id: userId } }
+    );
 
     res.json(updatedUser);
   } catch (err) {

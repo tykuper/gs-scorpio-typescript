@@ -19,6 +19,7 @@ const UserAccountForm = (props) => {
     shippingInfo.user?.firstName || ""
   );
   const [lastName, setLastName] = useState(shippingInfo.user?.lastName || "");
+  const [password, setPassword] = useState("");
   const [email, setEmail] = useState(shippingInfo.user?.email || "");
   const [address, setAddress] = useState(shippingInfo.address || "");
   const [city, setCity] = useState(shippingInfo.city || "");
@@ -48,6 +49,7 @@ const UserAccountForm = (props) => {
       lastName,
       email,
       userId: loggedInUser.id,
+      password,
     };
 
     const updatedUser = await axios.put("/api/users/update", updatedUserInfo);
@@ -91,12 +93,12 @@ const UserAccountForm = (props) => {
   return (
     <Fragment>
       <Helmet>
-        <title>Shipping Details</title>
+        <title>User Account</title>
       </Helmet>
 
       <div className="d-flex flex-column align-items-center">
         <h1 className="m-4 text-center">
-          <strong>Shipping Details</strong>
+          <strong>User Account</strong>
         </h1>
         <Form onSubmit={submitHandler}>
           <div className="d-block">
@@ -119,6 +121,28 @@ const UserAccountForm = (props) => {
               <Form.Control
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
+                required
+              />
+            </Form.Group>
+          </div>
+
+          <div className="d-block">
+            <Form.Group
+              className="mb-3 password-input-shipping"
+              controlId="password"
+            >
+              <Form.Label>Password</Form.Label>
+              {/* <Form.Control
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              /> */}
+              <input
+                name="password"
+                type="password"
+                className="form-control"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </Form.Group>

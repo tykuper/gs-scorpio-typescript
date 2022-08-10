@@ -76,6 +76,10 @@ form div {
   width: 70%;
 }
 
+.password-input-shipping {
+  width: 40%;
+}
+
 .card-image {
   object-fit: contain;
 }
