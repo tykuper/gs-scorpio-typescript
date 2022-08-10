@@ -176,6 +176,7 @@ const ShippingInfoForm = (props) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                type="email"
                 disabled={!!loggedInUser.id}
               />
             </Form.Group>

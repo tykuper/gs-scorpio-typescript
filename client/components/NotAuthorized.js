@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const NotFound = (props) => {
   return (
@@ -8,7 +9,9 @@ const NotFound = (props) => {
         <h1 className="section-title">Not authorized to access page!</h1>
         <img src="/images/sus-orca.jpeg" />
         <Link to={"/home"}>
-          <button className="btn btn-primary btn-lg">Back to Home</button>
+          <Button variant="primary" size="lg">
+            Back to Home
+          </Button>
         </Link>
       </div>
     </div>

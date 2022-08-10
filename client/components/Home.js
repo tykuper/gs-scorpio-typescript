@@ -6,6 +6,7 @@ import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { fetchShippingThunk } from "../store/shipping";
+import { Button } from "react-bootstrap";
 
 /**
  * COMPONENT
@@ -104,9 +105,9 @@ export const Home = (props) => {
           </h1>
           <p id="header-caption">A place for all your audio needs!</p>
           <Link to={"/products"}>
-            <button id="shop-button" className="btn btn-primary btn-lg">
+            <Button variant="primary" size="lg">
               Shop All
-            </button>
+            </Button>
           </Link>
         </div>
       </div>
@@ -347,9 +348,9 @@ export const Home = (props) => {
             <div className="col text-center form-bottom">
               <h1>Ready to buy?</h1>
               <Link to={"/products"}>
-                <button id="shop-button" className="btn btn-primary btn-lg">
+                <Button variant="primary" size="lg">
                   Shop All
-                </button>
+                </Button>
               </Link>
             </div>
           </div>

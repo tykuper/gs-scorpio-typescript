@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 const NotFound = (props) => {
   return (
@@ -10,7 +11,9 @@ const NotFound = (props) => {
         </h1>
         <img src="/images/confused-orca.png" />
         <Link to={"/home"}>
-          <button className="btn btn-primary btn-lg">Back to Home</button>
+          <Button variant="primary" size="lg">
+            Back to Home
+          </Button>
         </Link>
       </div>
     </div>
