@@ -115,3 +115,7 @@ form div {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#shop-button {
+  font-size: 30px;
+}

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setCart } from "../store/cart";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init;
@@ -15,6 +16,7 @@ export const Home = (props) => {
   // const { username } = props;
   const loggedInUser = props.loggedInUser;
   const cartItems = props.cart;
+  const history = useHistory();
 
   // if (
   //   loggedInUser.id &&
@@ -87,15 +89,26 @@ export const Home = (props) => {
   return (
     <div>
       <div className="home-top">
-        <div className="form-top">
-          <h1 id="header-title" className="text-center">
+        <div className="form-top text-center">
+          <h1 id="header-title">
             <strong>Orca Audio</strong>
           </h1>
-          <p id="header-caption" className="text-center">
-            A place for all your audio needs!
-          </p>
+          <p id="header-caption">A place for all your audio needs!</p>
+          <Link to={"/products"}>
+            <button id="shop-button" className="btn btn-primary btn-lg">
+              Shop All
+            </button>
+          </Link>
         </div>
       </div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#218BE6"
+          fill-opacity="1"
+          d="M0,320L9.2,288C18.5,256,37,192,55,181.3C73.8,171,92,213,111,245.3C129.2,277,148,299,166,261.3C184.6,224,203,128,222,112C240,96,258,160,277,160C295.4,160,314,96,332,106.7C350.8,117,369,203,388,208C406.2,213,425,139,443,144C461.5,149,480,235,498,234.7C516.9,235,535,149,554,106.7C572.3,64,591,64,609,101.3C627.7,139,646,213,665,218.7C683.1,224,702,160,720,165.3C738.5,171,757,245,775,245.3C793.8,245,812,171,831,138.7C849.2,107,868,117,886,144C904.6,171,923,213,942,213.3C960,213,978,171,997,170.7C1015.4,171,1034,213,1052,192C1070.8,171,1089,85,1108,69.3C1126.2,53,1145,107,1163,117.3C1181.5,128,1200,96,1218,117.3C1236.9,139,1255,213,1274,245.3C1292.3,277,1311,267,1329,229.3C1347.7,192,1366,128,1385,101.3C1403.1,75,1422,85,1431,90.7L1440,96L1440,0L1430.8,0C1421.5,0,1403,0,1385,0C1366.2,0,1348,0,1329,0C1310.8,0,1292,0,1274,0C1255.4,0,1237,0,1218,0C1200,0,1182,0,1163,0C1144.6,0,1126,0,1108,0C1089.2,0,1071,0,1052,0C1033.8,0,1015,0,997,0C978.5,0,960,0,942,0C923.1,0,905,0,886,0C867.7,0,849,0,831,0C812.3,0,794,0,775,0C756.9,0,738,0,720,0C701.5,0,683,0,665,0C646.2,0,628,0,609,0C590.8,0,572,0,554,0C535.4,0,517,0,498,0C480,0,462,0,443,0C424.6,0,406,0,388,0C369.2,0,351,0,332,0C313.8,0,295,0,277,0C258.5,0,240,0,222,0C203.1,0,185,0,166,0C147.7,0,129,0,111,0C92.3,0,74,0,55,0C36.9,0,18,0,9,0L0,0Z"
+        ></path>
+      </svg>
+
       <div className="container">
         <div className="col">
           <div className="row form-group">
