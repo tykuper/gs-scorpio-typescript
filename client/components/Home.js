@@ -5,6 +5,7 @@ import { setCart } from "../store/cart";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { fetchShippingThunk } from "../store/shipping";
 
 /**
  * COMPONENT
@@ -82,6 +83,17 @@ export const Home = (props) => {
 
     fetchFiltered().catch(console.error);
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (loggedInUser.id) {
+        await props.fetchShippingThunk(loggedInUser.id);
+      } else {
+        localStorage.setItem("shipping", JSON.stringify({}));
+      }
+    };
+    fetchData();
+  }, [loggedInUser]);
 
   return (
     <div>
@@ -361,6 +373,7 @@ const mapState = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setCart: (cart) => dispatch(setCart(cart)),
+    fetchShippingThunk: (userId) => dispatch(fetchShippingThunk(userId)),
   };
 };
 

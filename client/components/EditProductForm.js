@@ -4,6 +4,8 @@ import { fetchProductThunk, fetchProduct } from "../store/singleProduct";
 import { connect } from "react-redux";
 import NotFound from "./NotFound";
 import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class EditProductForm extends React.Component {
   constructor(props) {
@@ -36,6 +38,7 @@ class EditProductForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     console.log(this.props.product);
+    const notifyEdited = () => toast("Product Successfully Edited!");
 
     return this.props.product ? (
       <div>
@@ -146,7 +149,11 @@ class EditProductForm extends React.Component {
           </div>
 
           <div className="d-block">
-            <button className="btn btn-primary" type="submit">
+            <button
+              className="btn btn-primary"
+              type="submit"
+              onClick={notifyEdited}
+            >
               Edit Product
             </button>
           </div>

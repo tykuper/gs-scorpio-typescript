@@ -3,6 +3,8 @@ import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
 import { useHistory, Link } from "react-router-dom";
 import { addToCart } from "../store/cart";
 import { useDispatch } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { connect } from "react-redux";
 import { deleteProductThunk } from "../store/products";
 
@@ -22,6 +24,9 @@ const ProductCard = (props) => {
       props.deleteProduct(id);
     }
   };
+
+  const addNotify = () => toast("Item added to cart!");
+  const deleteNotify = () => toast("Product Successfully Deleted!");
 
   return (
     <div data-aos="fade-up" data-aos-duration="1500">
@@ -45,7 +50,10 @@ const ProductCard = (props) => {
             {history.location.pathname !== "/manage/products" && (
               <Button
                 variant="primary"
-                onClick={() => props.onClick(props.product)}
+                onClick={() => {
+                  props.onClick(props.product);
+                  addNotify();
+                }}
               >
                 Add to Cart
               </Button>
