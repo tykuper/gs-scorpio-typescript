@@ -40,7 +40,10 @@ const PaymentsButton = (props) => {
       ) : (
         <div className="payment">
           <Button
-            onClick={getStripeHandler}
+            onClick={() => {
+              getStripeHandler();
+              props.buttonRef?.current?.click();
+            }}
             disabled={isLoading}
             variant="primary"
             type="submit"

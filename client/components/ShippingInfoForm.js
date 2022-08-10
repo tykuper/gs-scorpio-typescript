@@ -1,11 +1,13 @@
 import axios from "axios";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet-async";
 import history from "../history";
 import PaymentsButton from "./PaymentsButton";
 
 const ShippingInfoForm = (props) => {
+  const buttonRef = useRef(null);
+
   const { shippingInfo, loggedInUser, setShipping } = props;
 
   const shippingLocalStorage = localStorage.getItem("shipping")
@@ -229,9 +231,13 @@ const ShippingInfoForm = (props) => {
           </div>
 
           <div className="d-flex flex-column align-items-center">
-            <Button variant="primary" type="submit">
-              <PaymentsButton />
-            </Button>
+            <PaymentsButton buttonRef={buttonRef} />
+            <button
+              variant="primary"
+              type="submit"
+              ref={buttonRef}
+              className="hide-button"
+            ></button>
           </div>
         </Form>
       </div>
