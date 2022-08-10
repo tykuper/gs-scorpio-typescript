@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Row, ButtonGroup, ToggleButton } from 'react-bootstrap';
+import { Row, Col, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { fetchProductsThunk } from '../store/products';
 import ProductCard from '../components/ProductCard';
 import { ProductPagination } from '../components/Pagination';
@@ -20,6 +20,13 @@ const ProductListView = (props) => {
     { name: 'In-Ear', value: '3' },
     { name: 'Over-Ear', value: '4' },
     { name: 'Noise-Cancelling', value: '5' },
+  ];
+
+  const perPage = [
+    { name: '3', value: '3' },
+    { name: '6', value: '6' },
+    { name: '9', value: '9' },
+    { name: '12', value: '12' },
   ];
 
   useEffect(() => {
@@ -93,7 +100,7 @@ const ProductListView = (props) => {
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(6);
+  const [productsPerPage, setProductsPerPage] = useState('6');
   const [totalProducts, setTotalProducts] = useState([]);
   const [currentTotal, setCurrentTotal] = useState(props.products.length);
 
@@ -135,24 +142,59 @@ const ProductListView = (props) => {
         <strong>Product List</strong>
       </h3>
       <br />
-      <ButtonGroup>
-        {radios.map((radio, idx) => (
-          <ToggleButton
-            key={idx}
-            id={`radio-${idx}`}
-            type="radio"
-            variant={
-              radioValue === radio.value ? 'outline-primary' : 'outline-primary'
-            }
-            name="radio"
-            value={radio.value}
-            checked={radioValue === radio.value}
-            onChange={(e) => setRadioValue(e.currentTarget.value)}
-          >
-            {radio.name}
-          </ToggleButton>
-        ))}
-      </ButtonGroup>
+      <Row>
+        <Col>
+          <ButtonGroup>
+            {radios.map((radio, idx) => (
+              <ToggleButton
+                key={idx}
+                id={`radio-${idx}`}
+                type="radio"
+                variant={
+                  radioValue === radio.value
+                    ? 'outline-primary'
+                    : 'outline-primary'
+                }
+                name="radio"
+                value={radio.value}
+                checked={radioValue === radio.value}
+                onChange={(e) => setRadioValue(e.currentTarget.value)}
+              >
+                {radio.name}
+              </ToggleButton>
+            ))}
+          </ButtonGroup>
+        </Col>
+        <Col>
+          <Row>
+            <Col xs={8}>
+              <p className="text-end">Items per page</p>
+            </Col>
+            <Col xs={4}>
+              <ButtonGroup>
+                {perPage.map((perPage, idx) => (
+                  <ToggleButton
+                    key={idx}
+                    id={`perPage-${idx}`}
+                    type="radio"
+                    variant={
+                      productsPerPage === perPage.value
+                        ? 'outline-primary'
+                        : 'outline-primary'
+                    }
+                    name="perPage"
+                    value={perPage.value}
+                    checked={productsPerPage === perPage.value}
+                    onChange={(e) => setProductsPerPage(e.currentTarget.value)}
+                  >
+                    {perPage.name}
+                  </ToggleButton>
+                ))}
+              </ButtonGroup>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
       <br />
       <br />
       <Row xs={1} md={2} lg={3} className="g-4">
