@@ -97,3 +97,21 @@ form div {
 .background {
   background-color: #A9BCD0;;
 }
+
+.form-top {
+  padding-top: 200px;
+}
+
+.form-group {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.home-top {
+  background-image: url(/images/home_orca.png);
+  height: 100vh;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

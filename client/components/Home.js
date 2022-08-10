@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import { setCart } from "../store/cart";
 import { Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init;
 
 /**
  * COMPONENT
@@ -82,239 +85,234 @@ export const Home = (props) => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="col">
-        <div className="row align-items-center">
-          <div className="col-md-6">
-            <h1 id="header-title">
-              <strong>Orca Audio</strong>
-            </h1>
-            <p id="header-caption" className="text-center">
-              A place for all your audio needs!
-            </p>
-          </div>
-          <div className="col-md-6">
-            <img
-              src="/images/home_orca.png"
-              style={{ width: "930px", height: "558px" }}
-            />
-          </div>
+    <div>
+      <div className="home-top">
+        <div className="form-top">
+          <h1 id="header-title" className="text-center">
+            <strong>Orca Audio</strong>
+          </h1>
+          <p id="header-caption" className="text-center">
+            A place for all your audio needs!
+          </p>
         </div>
-
-        <div className="row">
-          <h2>Check out our best sellers!</h2>
-          <Carousel variant="dark" interval={null}>
-            <Carousel.Item>
-              <Link to={`/products/${bestSellers[0]?.id}`}>
-                <img
-                  className="d-block"
-                  style={{
-                    margin: "auto",
-                    height: "300px",
-                    width: "600px",
-                  }}
-                  src={bestSellers[0]?.imageURL}
-                  alt="First slide"
-                />
-              </Link>
-              <Carousel.Caption
-                style={{ position: "relative", left: 0, top: 0 }}
-              >
+      </div>
+      <div className="container">
+        <div className="col">
+          <div className="row form-group">
+            <h2>Check out our best sellers!</h2>
+            <Carousel variant="dark" interval={null}>
+              <Carousel.Item>
                 <Link to={`/products/${bestSellers[0]?.id}`}>
-                  <h4>{bestSellers[0]?.name}</h4>
-                  <p>${bestSellers[0]?.price}</p>
+                  <img
+                    className="d-block"
+                    style={{
+                      margin: "auto",
+                      height: "300px",
+                      width: "600px",
+                    }}
+                    src={bestSellers[0]?.imageURL}
+                    alt="First slide"
+                  />
                 </Link>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Link to={`/products/${bestSellers[1]?.id}`}>
-                <img
-                  className="d-block"
-                  style={{
-                    margin: "auto",
-                    height: "300px",
-                    width: "600px",
-                  }}
-                  src={bestSellers[1]?.imageURL}
-                  alt="Second slide"
-                />
-              </Link>
-              <Carousel.Caption
-                style={{ position: "relative", left: 0, top: 0 }}
-              >
+                <Carousel.Caption
+                  style={{ position: "relative", left: 0, top: 0 }}
+                >
+                  <Link to={`/products/${bestSellers[0]?.id}`}>
+                    <h4>{bestSellers[0]?.name}</h4>
+                    <p>${bestSellers[0]?.price}</p>
+                  </Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
                 <Link to={`/products/${bestSellers[1]?.id}`}>
-                  <h4>{bestSellers[1]?.name}</h4>
-                  <p>${bestSellers[1]?.price}</p>
+                  <img
+                    className="d-block"
+                    style={{
+                      margin: "auto",
+                      height: "300px",
+                      width: "600px",
+                    }}
+                    src={bestSellers[1]?.imageURL}
+                    alt="Second slide"
+                  />
                 </Link>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Link to={`/products/${bestSellers[2]?.id}`}>
-                <img
-                  className="d-block"
-                  style={{
-                    margin: "auto",
-                    height: "300px",
-                    width: "600px",
-                  }}
-                  src={bestSellers[2]?.imageURL}
-                  alt="Third slide"
-                />
-              </Link>
-              <Carousel.Caption
-                style={{ position: "relative", left: 0, top: 0 }}
-              >
+                <Carousel.Caption
+                  style={{ position: "relative", left: 0, top: 0 }}
+                >
+                  <Link to={`/products/${bestSellers[1]?.id}`}>
+                    <h4>{bestSellers[1]?.name}</h4>
+                    <p>${bestSellers[1]?.price}</p>
+                  </Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
                 <Link to={`/products/${bestSellers[2]?.id}`}>
-                  <h4>{bestSellers[2]?.name}</h4>
-                  <p>${bestSellers[2]?.price}</p>
+                  <img
+                    className="d-block"
+                    style={{
+                      margin: "auto",
+                      height: "300px",
+                      width: "600px",
+                    }}
+                    src={bestSellers[2]?.imageURL}
+                    alt="Third slide"
+                  />
                 </Link>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
-        </div>
+                <Carousel.Caption
+                  style={{ position: "relative", left: 0, top: 0 }}
+                >
+                  <Link to={`/products/${bestSellers[2]?.id}`}>
+                    <h4>{bestSellers[2]?.name}</h4>
+                    <p>${bestSellers[2]?.price}</p>
+                  </Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
+          </div>
 
-        <div className="row">
-          <h2>Increase your focus with noise cancellation!</h2>
-          <Carousel variant="dark" interval={null}>
-            <Carousel.Item>
-              <Link to={`/products/${noiseCancelling[0]?.id}`}>
-                <img
-                  className="d-block"
-                  style={{
-                    margin: "auto",
-                    height: "300px",
-                    width: "600px",
-                  }}
-                  src={noiseCancelling[0]?.imageURL}
-                  alt="First slide"
-                />
-              </Link>
-              <Carousel.Caption
-                style={{ position: "relative", left: 0, top: 0 }}
-              >
+          <div className="row form-group">
+            <h2>Increase your focus with noise cancellation!</h2>
+            <Carousel variant="dark" interval={null}>
+              <Carousel.Item>
                 <Link to={`/products/${noiseCancelling[0]?.id}`}>
-                  <h4>{noiseCancelling[0]?.name}</h4>
-                  <p>${noiseCancelling[0]?.price}</p>
+                  <img
+                    className="d-block"
+                    style={{
+                      margin: "auto",
+                      height: "300px",
+                      width: "600px",
+                    }}
+                    src={noiseCancelling[0]?.imageURL}
+                    alt="First slide"
+                  />
                 </Link>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Link to={`/products/${noiseCancelling[1]?.id}`}>
-                <img
-                  className="d-block"
-                  style={{
-                    margin: "auto",
-                    height: "300px",
-                    width: "600px",
-                  }}
-                  src={noiseCancelling[1]?.imageURL}
-                  alt="Second slide"
-                />
-              </Link>
-              <Carousel.Caption
-                style={{ position: "relative", left: 0, top: 0 }}
-              >
+                <Carousel.Caption
+                  style={{ position: "relative", left: 0, top: 0 }}
+                >
+                  <Link to={`/products/${noiseCancelling[0]?.id}`}>
+                    <h4>{noiseCancelling[0]?.name}</h4>
+                    <p>${noiseCancelling[0]?.price}</p>
+                  </Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
                 <Link to={`/products/${noiseCancelling[1]?.id}`}>
-                  <h4>{noiseCancelling[1]?.name}</h4>
-                  <p>${noiseCancelling[1]?.price}</p>
+                  <img
+                    className="d-block"
+                    style={{
+                      margin: "auto",
+                      height: "300px",
+                      width: "600px",
+                    }}
+                    src={noiseCancelling[1]?.imageURL}
+                    alt="Second slide"
+                  />
                 </Link>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Link to={`/products/${noiseCancelling[2]?.id}`}>
-                <img
-                  className="d-block"
-                  style={{
-                    margin: "auto",
-                    height: "300px",
-                    width: "600px",
-                  }}
-                  src={noiseCancelling[2]?.imageURL}
-                  alt="Third slide"
-                />
-              </Link>
-              <Carousel.Caption
-                style={{ position: "relative", left: 0, top: 0 }}
-              >
+                <Carousel.Caption
+                  style={{ position: "relative", left: 0, top: 0 }}
+                >
+                  <Link to={`/products/${noiseCancelling[1]?.id}`}>
+                    <h4>{noiseCancelling[1]?.name}</h4>
+                    <p>${noiseCancelling[1]?.price}</p>
+                  </Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
                 <Link to={`/products/${noiseCancelling[2]?.id}`}>
-                  <h4>{noiseCancelling[2]?.name}</h4>
-                  <p>${noiseCancelling[2]?.price}</p>
+                  <img
+                    className="d-block"
+                    style={{
+                      margin: "auto",
+                      height: "300px",
+                      width: "600px",
+                    }}
+                    src={noiseCancelling[2]?.imageURL}
+                    alt="Third slide"
+                  />
                 </Link>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
-        </div>
+                <Carousel.Caption
+                  style={{ position: "relative", left: 0, top: 0 }}
+                >
+                  <Link to={`/products/${noiseCancelling[2]?.id}`}>
+                    <h4>{noiseCancelling[2]?.name}</h4>
+                    <p>${noiseCancelling[2]?.price}</p>
+                  </Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
+          </div>
 
-        <div className="row">
-          <h2>Get them before they're gone!</h2>
-          <Carousel variant="dark" interval={null}>
-            <Carousel.Item>
-              <Link to={`/products/${lowStock[0]?.id}`}>
-                <img
-                  className="d-block"
-                  style={{
-                    margin: "auto",
-                    height: "300px",
-                    width: "600px",
-                  }}
-                  src={lowStock[0]?.imageURL}
-                  alt="First slide"
-                />
-              </Link>
-              <Carousel.Caption
-                style={{ position: "relative", left: 0, top: 0 }}
-              >
+          <div className="row form-group">
+            <h2>Get them before they're gone!</h2>
+            <Carousel variant="dark" interval={null}>
+              <Carousel.Item>
                 <Link to={`/products/${lowStock[0]?.id}`}>
-                  <h4>{lowStock[0]?.name}</h4>
-                  <p>${lowStock[0]?.price}</p>
+                  <img
+                    className="d-block"
+                    style={{
+                      margin: "auto",
+                      height: "300px",
+                      width: "600px",
+                    }}
+                    src={lowStock[0]?.imageURL}
+                    alt="First slide"
+                  />
                 </Link>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Link to={`/products/${lowStock[1]?.id}`}>
-                <img
-                  className="d-block"
-                  style={{
-                    margin: "auto",
-                    height: "300px",
-                    width: "600px",
-                  }}
-                  src={lowStock[1]?.imageURL}
-                  alt="Second slide"
-                />
-              </Link>
-              <Carousel.Caption
-                style={{ position: "relative", left: 0, top: 0 }}
-              >
+                <Carousel.Caption
+                  style={{ position: "relative", left: 0, top: 0 }}
+                >
+                  <Link to={`/products/${lowStock[0]?.id}`}>
+                    <h4>{lowStock[0]?.name}</h4>
+                    <p>${lowStock[0]?.price}</p>
+                  </Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
                 <Link to={`/products/${lowStock[1]?.id}`}>
-                  <h4>{lowStock[1]?.name}</h4>
-                  <p>${lowStock[1]?.price}</p>
+                  <img
+                    className="d-block"
+                    style={{
+                      margin: "auto",
+                      height: "300px",
+                      width: "600px",
+                    }}
+                    src={lowStock[1]?.imageURL}
+                    alt="Second slide"
+                  />
                 </Link>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Link to={`/products/${lowStock[2]?.id}`}>
-                <img
-                  className="d-block"
-                  style={{
-                    margin: "auto",
-                    height: "300px",
-                    width: "600px",
-                  }}
-                  src={lowStock[2]?.imageURL}
-                  alt="Third slide"
-                />
-              </Link>
-              <Carousel.Caption
-                style={{ position: "relative", left: 0, top: 0 }}
-              >
+                <Carousel.Caption
+                  style={{ position: "relative", left: 0, top: 0 }}
+                >
+                  <Link to={`/products/${lowStock[1]?.id}`}>
+                    <h4>{lowStock[1]?.name}</h4>
+                    <p>${lowStock[1]?.price}</p>
+                  </Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+              <Carousel.Item>
                 <Link to={`/products/${lowStock[2]?.id}`}>
-                  <h4>{lowStock[2]?.name}</h4>
-                  <p>${lowStock[2]?.price}</p>
+                  <img
+                    className="d-block"
+                    style={{
+                      margin: "auto",
+                      height: "300px",
+                      width: "600px",
+                    }}
+                    src={lowStock[2]?.imageURL}
+                    alt="Third slide"
+                  />
                 </Link>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
+                <Carousel.Caption
+                  style={{ position: "relative", left: 0, top: 0 }}
+                >
+                  <Link to={`/products/${lowStock[2]?.id}`}>
+                    <h4>{lowStock[2]?.name}</h4>
+                    <p>${lowStock[2]?.price}</p>
+                  </Link>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </Carousel>
+          </div>
         </div>
       </div>
     </div>
