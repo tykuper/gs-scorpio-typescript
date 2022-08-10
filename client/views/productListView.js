@@ -1,20 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  Row,
-  Col,
-  ListGroup,
-  Card,
-  Button,
-  ButtonGroup,
-  ToggleButton,
-} from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { Row, ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { fetchProductsThunk } from '../store/products';
 import ProductCard from '../components/ProductCard';
 import { ProductPagination } from '../components/Pagination';
 import { addToCart, setCart } from '../store/cart';
-import history from '../history.js';
 import axios from 'axios';
 
 const ProductListView = (props) => {
@@ -46,9 +36,6 @@ const ProductListView = (props) => {
           '/api/orders/create',
           userId
         );
-
-        // if (!loggedInUser && localStorageCart.length) {
-        // }
 
         const cart = cartItems.map((item) => {
           return {
@@ -89,21 +76,11 @@ const ProductListView = (props) => {
           };
         });
 
-        // setCartDB(res.data);
         setCartDB(inCartOrdersProducts);
-
-        console.log('**CART Product View Page from DB: ', inCartOrdersProducts);
 
         inCartOrdersProducts = inCartOrdersProducts || [];
         localStorage.setItem('cartItems', JSON.stringify(inCartOrdersProducts));
-
-        // props.setCart(inCartOrdersProducts);
       }
-
-      //delete orders from DB.
-      // if (!cartItems.length && orderId) {
-      //   await axios.delete(`/api/orders/delete/${orderId}`);
-      // }
     };
 
     fetchData().catch(console.error);
@@ -117,6 +94,8 @@ const ProductListView = (props) => {
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(6);
+  const [totalProducts, setTotalProducts] = useState([]);
+  const [currentTotal, setCurrentTotal] = useState(props.products.length);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -125,9 +104,6 @@ const ProductListView = (props) => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   // calculates total products for each filter
-  const [totalProducts, setTotalProducts] = useState([]);
-  const [currentTotal, setCurrentTotal] = useState(props.products.length);
-
   useEffect(() => {
     if (props.products.length) {
       let newTotalProducts = [];
@@ -145,14 +121,10 @@ const ProductListView = (props) => {
       }
       setTotalProducts(newTotalProducts);
     }
-    console.log('TOTAL_PRODUCTS - ', totalProducts);
   }, [props.products]);
 
-  // calculates total products for currently selected filter (not working)
+  // calculates total products for currently selected filter and resets to page 1
   useEffect(() => {
-    console.log('***', radioValue);
-    console.log(totalProducts);
-    console.log(totalProducts[parseInt(radioValue) - 1]);
     setCurrentTotal(totalProducts[parseInt(radioValue) - 1]);
     paginate(1);
   }, [radioValue]);
