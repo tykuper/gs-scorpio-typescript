@@ -124,6 +124,38 @@ const ProductListView = (props) => {
   //change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  // calculates total products for each filter
+  const [totalProducts, setTotalProducts] = useState([]);
+  const [currentTotal, setCurrentTotal] = useState(props.products.length);
+
+  useEffect(() => {
+    if (props.products.length) {
+      let newTotalProducts = [];
+      for (let i = 1; i <= radios.length; i++) {
+        newTotalProducts.push(
+          props.products.filter((product) => {
+            if (i === 1) return true;
+            else if (i === 2)
+              return product.numReviews >= 150 && product.ratings >= 4.0;
+            else if (i === 3) return product.category === 'in-ear';
+            else if (i === 4) return product.category === 'over-ear';
+            else if (i === 5) return product.noiseCancelling === true;
+          }).length
+        );
+      }
+      setTotalProducts(newTotalProducts);
+    }
+    console.log('TOTAL_PRODUCTS - ', totalProducts);
+  }, [props.products]);
+
+  // calculates total products for currently selected filter (not working)
+  useEffect(() => {
+    console.log('***', radioValue);
+    console.log(totalProducts);
+    console.log(totalProducts[parseInt(radioValue) - 1]);
+    setCurrentTotal(totalProducts[parseInt(radioValue) - 1]);
+  }, [radioValue]);
+
   return (
     <div className="text-center container py-5">
       <h3>
@@ -177,7 +209,7 @@ const ProductListView = (props) => {
       <br />
       <ProductPagination
         productsPerPage={productsPerPage}
-        totalProducts={props.products.length}
+        totalProducts={currentTotal || props.products.length}
         paginate={paginate}
         currentPage={currentPage}
       />
