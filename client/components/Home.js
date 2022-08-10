@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { setCart } from "../store/cart";
+import { fetchShippingThunk } from "../store/shipping";
 
 /**
  * COMPONENT
@@ -54,6 +55,17 @@ export const Home = (props) => {
     fetchData().catch(console.error);
   }, [loggedInUser]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (loggedInUser.id) {
+        await props.fetchShippingThunk(loggedInUser.id);
+      } else {
+        localStorage.setItem("shipping", JSON.stringify({}));
+      }
+    };
+    fetchData();
+  }, [loggedInUser]);
+
   return (
     <div className="row">
       <div className="col">
@@ -84,6 +96,7 @@ const mapState = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setCart: (cart) => dispatch(setCart(cart)),
+    fetchShippingThunk: (userId) => dispatch(fetchShippingThunk(userId)),
   };
 };
 
