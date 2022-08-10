@@ -1,12 +1,14 @@
-import React from "react";
-import { addProductThunk } from "../store/products";
-import { connect } from "react-redux";
+import React from 'react';
+import { addProductThunk } from '../store/products';
+import { connect } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class AddProductForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: "",
+      name: '',
       price: 0,
     };
 
@@ -27,6 +29,7 @@ class AddProductForm extends React.Component {
 
   render() {
     const { handleChange, handleSubmit } = this;
+    const addNotify = () => toast('Item Successfully Added!');
 
     return (
       <div>
@@ -117,7 +120,7 @@ class AddProductForm extends React.Component {
           <div className="col-md-4 m-4">
             <label htmlFor="noiseCancelling" className="form-check-label">
               Noise Cancelling
-            </label>{" "}
+            </label>{' '}
             <select
               name="noiseCancelling"
               className="form-control"
@@ -129,7 +132,11 @@ class AddProductForm extends React.Component {
           </div>
 
           <div className="d-block">
-            <button className="btn btn-primary" type="submit">
+            <button
+              className="btn btn-primary"
+              type="submit"
+              onClick={addNotify}
+            >
               Add Product
             </button>
           </div>
