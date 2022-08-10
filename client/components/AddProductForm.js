@@ -1,14 +1,14 @@
-import React from 'react';
-import { addProductThunk } from '../store/products';
-import { connect } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import { addProductThunk } from "../store/products";
+import { connect } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class AddProductForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      name: '',
+      name: "",
       price: 0,
     };
 
@@ -29,7 +29,7 @@ class AddProductForm extends React.Component {
 
   render() {
     const { handleChange, handleSubmit } = this;
-    const addNotify = () => toast('Item Successfully Added!');
+    const addNotify = () => toast("Item Successfully Added!");
 
     return (
       <div>
@@ -39,7 +39,7 @@ class AddProductForm extends React.Component {
         <form
           onSubmit={handleSubmit}
           className="row needs-validation"
-          novalidate
+          noValidate
         >
           <div className="col-md-4 m-4">
             <label htmlFor="name" className="form-label">
@@ -65,13 +65,16 @@ class AddProductForm extends React.Component {
             />
           </div>
           <div className="col-md-4 m-4">
-            <label htmlFor="shortDescription" className="form-label">
-              Short Description
+            <label htmlFor="inventory" className="form-label">
+              Inventory
             </label>
             <input
-              name="shortDescription"
-              type="text"
+              name="inventory"
+              type="number"
               className="form-control"
+              step="1"
+              min="0"
+              max="999"
               onChange={handleChange}
             />
           </div>
@@ -120,7 +123,7 @@ class AddProductForm extends React.Component {
           <div className="col-md-4 m-4">
             <label htmlFor="noiseCancelling" className="form-check-label">
               Noise Cancelling
-            </label>{' '}
+            </label>{" "}
             <select
               name="noiseCancelling"
               className="form-control"
