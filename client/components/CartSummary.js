@@ -18,8 +18,6 @@ const CartSummary = (props) => {
   const { check, includeOrderId, orderId, loggedInUser } = props;
   let cartItems = props?.cartItems || [];
 
-  // console.log(check);
-
   const itemsTotalCount = +cartItems.reduce(
     (acc, curr) => acc + curr.quantity,
     0

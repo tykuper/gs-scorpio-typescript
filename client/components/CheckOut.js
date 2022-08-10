@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
@@ -7,6 +7,8 @@ import CheckOutShipping from "./CheckOutShipping";
 import CheckOutPayment from "./CheckOutPayment";
 import CheckOutSummary from "./CheckOutSummary";
 import { connect } from "react-redux";
+import axios from "axios";
+import { includeOrderId } from "../store/cart";
 
 const FAKE_CHECKOUT_DATA = {
   address: "113 3rd Lane Marcus Hook, PA 19061",
@@ -42,6 +44,27 @@ const FAKE_CHECKOUT_DATA = {
 const CheckOut = (props) => {
   const { cart: cartItems, shipping, loggedInUser } = props;
 
+  const [orderId, setOrderId] = useState();
+
+  useEffect(() => {
+    const getOrderId = async () => {
+      if (loggedInUser.id) {
+        const res = await axios.get(`api/orders/user/${loggedInUser.id}`);
+
+        const inCartOrders = res.data.filter(
+          (item) => item.orderStatus === "In-Cart"
+        );
+
+        const getOrderId = inCartOrders[0]?.id;
+
+        console.log(getOrderId);
+
+        setOrderId(getOrderId);
+      }
+    };
+    getOrderId();
+  }, [cartItems, loggedInUser]);
+
   return (
     <Fragment>
       <Helmet>
@@ -63,6 +86,7 @@ const CheckOut = (props) => {
             cartItems={cartItems}
             loggedInUser={loggedInUser}
             shipping={shipping}
+            orderId={orderId}
           />
         </Col>
       </Row>
@@ -78,4 +102,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(CheckOut);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    includeOrderId: (orderId) => dispatch(includeOrderId(orderId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckOut);
