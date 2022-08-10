@@ -154,6 +154,7 @@ const ProductListView = (props) => {
     console.log(totalProducts);
     console.log(totalProducts[parseInt(radioValue) - 1]);
     setCurrentTotal(totalProducts[parseInt(radioValue) - 1]);
+    paginate(1);
   }, [radioValue]);
 
   return (
