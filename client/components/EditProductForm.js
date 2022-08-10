@@ -1,7 +1,9 @@
-import React from "react";
-import { updateProductThunk } from "../store/products";
-import { fetchProductThunk, fetchProduct } from "../store/singleProduct";
-import { connect } from "react-redux";
+import React from 'react';
+import { updateProductThunk } from '../store/products';
+import { fetchProductThunk, fetchProduct } from '../store/singleProduct';
+import { connect } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class EditProductForm extends React.Component {
   constructor(props) {
@@ -34,6 +36,7 @@ class EditProductForm extends React.Component {
   render() {
     const { handleChange, handleSubmit } = this;
     console.log(this.props.product);
+    const notifyEdited = () => toast('Product Successfully Edited!');
 
     return this.props.product ? (
       <div>
@@ -132,7 +135,7 @@ class EditProductForm extends React.Component {
           <div className="col-md-4 m-4">
             <label htmlFor="noiseCancelling" className="form-check-label">
               Noise Cancelling
-            </label>{" "}
+            </label>{' '}
             <select
               name="noiseCancelling"
               className="form-control"
@@ -144,7 +147,11 @@ class EditProductForm extends React.Component {
           </div>
 
           <div className="d-block">
-            <button className="btn btn-primary" type="submit">
+            <button
+              className="btn btn-primary"
+              type="submit"
+              onClick={notifyEdited}
+            >
               Edit Product
             </button>
           </div>

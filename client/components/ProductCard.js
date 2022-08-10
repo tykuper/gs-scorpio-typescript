@@ -3,6 +3,9 @@ import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap';
 import { useHistory, Link } from 'react-router-dom';
 import { addToCart } from '../store/cart';
 import { useDispatch } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { connect } from 'react-redux';
 import { deleteProductThunk } from '../store/products';
 
@@ -23,6 +26,9 @@ const ProductCard = (props) => {
     }
   };
 
+  const addNotify = () => toast('Item added to cart!');
+  const deleteNotify = () => toast('Product Successfully Deleted!');
+
   return (
     <Col>
       <Card>
@@ -35,7 +41,7 @@ const ProductCard = (props) => {
             <Card.Title>{name}</Card.Title>
             <Card.Text>${price}</Card.Text>
             {props.isAdmin &&
-              history.location.pathname === "/manage/products" && (
+              history.location.pathname === '/manage/products' && (
                 <Card.Text>Inventory: {inventory}</Card.Text>
               )}
           </Card.Body>
@@ -44,7 +50,10 @@ const ProductCard = (props) => {
           {history.location.pathname !== '/manage/products' && (
             <Button
               variant="primary"
-              onClick={() => props.onClick(props.product)}
+              onClick={() => {
+                props.onClick(props.product);
+                addNotify();
+              }}
             >
               Add to Cart
             </Button>
@@ -58,6 +67,7 @@ const ProductCard = (props) => {
                 variant="danger"
                 onClick={() => {
                   deleteProduct(id);
+                  deleteNotify();
                 }}
               >
                 Delete Product
