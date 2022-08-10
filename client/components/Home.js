@@ -82,9 +82,25 @@ export const Home = (props) => {
   }, []);
 
   return (
-    <div className="row">
+    <div className="container">
       <div className="col">
-        <h1 className="text-center">Orca Audio</h1>
+        <div className="row align-items-center">
+          <div className="col-md-6">
+            <h1 id="header-title">
+              <strong>Orca Audio</strong>
+            </h1>
+            <p id="header-caption" className="text-center">
+              A place for all your audio needs!
+            </p>
+          </div>
+          <div className="col-md-6">
+            <img
+              src="/images/home_orca.png"
+              style={{ width: "930px", height: "558px" }}
+            />
+          </div>
+        </div>
+
         <div className="row">
           <h2>Check out our best sellers!</h2>
           <Carousel variant="dark" interval={null}>
