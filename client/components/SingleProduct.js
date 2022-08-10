@@ -12,8 +12,7 @@ import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
 import history from "../history.js";
 import FiveStarReviews from "./FiveStarReviews";
-
-//
+import { Link } from "react-router-dom";
 
 const SingleProduct = (props) => {
   const {
@@ -87,8 +86,14 @@ const SingleProduct = (props) => {
       </Col>
     </Row>
   ) : (
-    <div>
-      <h1 className="section-title">Product does not exist!</h1>
+    <div className="container text-center">
+      <div className="row">
+        <h1 className="section-title">Product does not exist!</h1>
+        <img src="/images/confused-orca.png" />
+        <Link to={"/home"}>
+          <button className="btn btn-primary btn-lg">Back to Home</button>
+        </Link>
+      </div>
     </div>
   );
 };

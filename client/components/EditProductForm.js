@@ -2,6 +2,8 @@ import React from "react";
 import { updateProductThunk } from "../store/products";
 import { fetchProductThunk, fetchProduct } from "../store/singleProduct";
 import { connect } from "react-redux";
+import NotFound from "./NotFound";
+import { Link } from "react-router-dom";
 
 class EditProductForm extends React.Component {
   constructor(props) {
@@ -151,8 +153,14 @@ class EditProductForm extends React.Component {
         </form>
       </div>
     ) : (
-      <div>
-        <h1 className="section-title">Product does not exist!</h1>
+      <div className="container text-center">
+        <div className="row">
+          <h1 className="section-title">Product does not exist!</h1>
+          <img src="/images/confused-orca.png" />
+          <Link to={"/manage/products"}>
+            <button className="btn btn-primary btn-lg">Back to Products</button>
+          </Link>
+        </div>
       </div>
     );
   }
