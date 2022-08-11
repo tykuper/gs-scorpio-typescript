@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Row, Col, ButtonGroup, ToggleButton } from "react-bootstrap";
 import { fetchProductsThunk } from "../store/products";
 import ProductCard from "../components/ProductCard";
-import { ProductPagination } from "../components/Pagination";
+import { ProductPagination } from '../components/Pagination.js';
 import { addToCart, setCart } from "../store/cart";
 import axios from "axios";
 
