@@ -1,7 +1,7 @@
 {
-  "name": "scorpio",
+  "name": "scorpiots",
   "version": "2.0.0",
-  "description": "Scorpio audio product website",
+  "description": "Scorpio audio product website - converted to typescript",
   "main": "index.js",
   "scripts": {
     "build": "webpack",

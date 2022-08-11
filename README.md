@@ -2,14 +2,15 @@
 
 ## HEROKU APP LINK
 
-https://orca-audio.herokuapp.com/home
+https://orca-audio-typescript.herokuapp.com/home
 
 ## Local installation
 
 - Run:
 
 ```
-createdb scorpio scorpio-test
+createdb scorpiots
+createdb scorpiots-test
 npm i
 npm run seed
 npm run start:dev
