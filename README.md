@@ -16,10 +16,10 @@ npm run seed
 npm run start:dev
 ```
 
-- Make an .env in the root directory and add:
+- Make an .env in the root directory. Ask me for the private key, and enter it in the env file:
 
 ```
-STRIPE_PRIVATE_KEY=sk_test_51LUtMRKQ83pm0hW7BrLyVyeKoJ8ytLUQCVyostUnkJ7nGQgvifaja6iRZ7ALI37OMcoqp47DM9A4TJjl1rYI8quM00Ud3vKJHv
+STRIPE_PRIVATE_KEY={private key}
 ```
 
 - View in browser via http://localhost:8080/
