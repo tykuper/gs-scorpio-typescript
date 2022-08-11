@@ -19,7 +19,6 @@ const UserNavbar = ({ user, resetCart, resetShipping }) => {
       <Nav className="me-auto">
         <NavDropdown title={`Hi, ${user.firstName}`} id="basic-nav-dropdown">
           <NavDropdown.Item href="/user-account">Account</NavDropdown.Item>
-          {/* <NavDropdown.Item href="/orders">Orders</NavDropdown.Item> */}
           <NavDropdown.Divider />
           <NavDropdown.Item
             href="/home"
