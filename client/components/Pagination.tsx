@@ -1,15 +1,22 @@
 import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 
-export const ProductPagination = ({
+export interface Props {
+  productsPerPage: number;
+  totalProducts: number;
+  paginate: (number: number) => void;
+  currentPage: number;
+}
+
+export const ProductPagination: React.FC<Props> = ({
   productsPerPage,
   totalProducts,
   paginate,
   currentPage,
 }) => {
-  let pageNumbers = [];
+  let pageNumbers: any[] = [];
   for (
-    let number = 1;
+    let number: number = 1;
     number <= Math.ceil(totalProducts / productsPerPage);
     number++
   ) {
