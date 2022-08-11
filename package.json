@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "@stripe/stripe-js": "^1.35.0",
+    "@types/react-bootstrap": "^0.32.30",
     "aos": "^3.0.0-beta.6",
     "autoprefixer": "^10.4.8",
     "axios": "^0.21.1",
