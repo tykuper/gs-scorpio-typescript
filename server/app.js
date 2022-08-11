@@ -4,7 +4,7 @@ const morgan = require("morgan");
 const app = express();
 const PORT = process.env.PORT || 8080;
 const defaultURL = process.env.DATABASE_URL
-  ? `https://orca-audio-typescript.herokuapp.com`
+  ? `https://orca-audio.herokuapp.com`
   : `http://localhost:${PORT}`;
 require("dotenv").config();
 module.exports = app;
